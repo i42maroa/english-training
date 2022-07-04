@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.line{
+    display: flex;
+    flex-direction: row;
+}
+
+.line p{
+    margin: 0.2rem auto;
+}

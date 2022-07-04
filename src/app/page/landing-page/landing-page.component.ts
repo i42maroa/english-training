@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-landing-page',
@@ -8,10 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class LandingPageComponent implements OnInit {
 
-  form!:FormGroup;
-
   constructor(
-    private readonly formBuilder:FormBuilder
   ) { }
 
   ngOnInit(): void {
