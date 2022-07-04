@@ -1,7 +1,12 @@
 <div class="page-container">
     <h1>ENGLISH TRAINING</h1>
 
-    <app-new-word-modal></app-new-word-modal>
+    <div class="buttons-container">
+        <button class="option-button" (click)="showNewWordModal()">Add Words</button>
+        <button class="option-button" (click)="showListWordsModal()">List Words</button>
+    </div>
 
-    <app-list-words></app-list-words>
+    <div *ngIf="showNewWord"><app-new-word-modal></app-new-word-modal></div>
+    <div *ngIf="showListWords"><app-list-words></app-list-words></div>
+    
 </div>

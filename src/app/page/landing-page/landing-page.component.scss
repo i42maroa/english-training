@@ -2,3 +2,19 @@
     background-color: var(--page-background);
     min-height: 100vh;
 }
+
+.buttons-container{
+    display: flex;
+    
+    margin: 1rem auto;
+}
+
+.option-button{
+    margin: auto;
+    padding: 2rem;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--button-color);
+    color: #fff;
+    text-transform: uppercase;
+}
