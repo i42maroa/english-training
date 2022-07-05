@@ -5,5 +5,5 @@
     <app-list-words></app-list-words>
     
     <app-new-word-modal class="add_modal" *ngIf="showModal" (showModal)="addModal($event)"></app-new-word-modal>
-    <app-add-button class="add_button" (showModal)="addModal($event)"></app-add-button>
+    <app-add-button class="add_button" [show]="showModal" (showModal)="addModal($event)"></app-add-button>
 </div>

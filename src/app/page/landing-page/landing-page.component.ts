@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  showModal!:boolean;
+  showModal:boolean = false;
 
   constructor(
   ) { }
