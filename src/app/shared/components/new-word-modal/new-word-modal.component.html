@@ -1,6 +1,8 @@
 <form [formGroup]="form" class="form-container">
     <input formControlName="inputWord" type="text" placeholder="word">
+    <a href={{searchText}} target="_blank">Trans</a>
     <input formControlName="translateWord" type="text" placeholder="translation">
-    <button>Translate</button>
-    <button>Save</button>
+    
+    <button [disabled]="sendButton" (click)="saveWord()">Save</button>
+    
 </form>
