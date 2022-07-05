@@ -1,6 +1,7 @@
-.page-container{
+.page_container{
     background-color: var(--page-background);
     min-height: 100vh;
+    position: relative;
 }
 
 .buttons-container{
@@ -17,4 +18,25 @@
     background-color: var(--button-color);
     color: #fff;
     text-transform: uppercase;
+}
+
+.add_button{
+    position: absolute;
+    bottom: 5px;
+    right: 2px;
+}
+
+.add_modal{
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 100px;
+    max-width: 450px;
+}
+
+@media (max-width: 500px) {
+    .add_button{
+        right: 5px;
+    }
 }

@@ -1,12 +1,9 @@
-<div class="page-container">
+<div class="page_container">
     <h1>ENGLISH TRAINING</h1>
 
-    <div class="buttons-container">
-        <button class="option-button" (click)="showNewWordModal()">Add Words</button>
-        <button class="option-button" (click)="showListWordsModal()">List Words</button>
-    </div>
 
-    <div *ngIf="showNewWord"><app-new-word-modal></app-new-word-modal></div>
-    <div *ngIf="showListWords"><app-list-words></app-list-words></div>
+    <app-list-words></app-list-words>
     
+    <app-new-word-modal class="add_modal" *ngIf="showModal"></app-new-word-modal>
+    <app-add-button class="add_button" (showModal)="addModal($event)"></app-add-button>
 </div>

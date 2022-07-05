@@ -7,23 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  showNewWord:boolean = false;
-  showListWords:boolean = false;
+  showModal!:boolean;
+
   constructor(
   ) { }
 
   ngOnInit(): void {
+    this.showModal = false;
   }
 
-  showNewWordModal(){
-    this.showNewWord = true;
-    this.showListWords = false;
-    console.log("change")
-  }
-
-  showListWordsModal(){
-    this.showListWords = true;
-    this.showNewWord = false;
+  addModal(show:boolean){
+    this.showModal = show;
   }
 
 }

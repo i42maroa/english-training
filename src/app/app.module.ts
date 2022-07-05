@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LandingPageComponent } from './page/landing-page/landing-page.component';
 import { NewWordModalComponent } from './shared/components/new-word-modal/new-word-modal.component';
 import { ListWordsComponent } from './shared/components/list-words/list-words.component';
+import { AddButtonComponent } from './shared/components/add-button/add-button.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ListWordsComponent } from './shared/components/list-words/list-words.co
     AppComponent,
     LandingPageComponent,
     NewWordModalComponent,
-    ListWordsComponent
+    ListWordsComponent,
+    AddButtonComponent
   ],
   imports: [
     BrowserModule,
