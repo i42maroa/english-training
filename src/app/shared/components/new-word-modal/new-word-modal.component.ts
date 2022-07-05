@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { WordService } from 'src/app/core/services/word.service';
+import { Word } from '../../models/word.interface';
 
 const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa&text=';
 
@@ -18,7 +20,7 @@ export class NewWordModalComponent implements OnInit {
   translateButton:boolean = true;
 
   constructor(
-    private readonly formBuilder:FormBuilder
+    private readonly wordService:WordService
   ) { }
 
   ngOnInit(): void {
@@ -38,8 +40,15 @@ export class NewWordModalComponent implements OnInit {
   }
 
   saveWord(){
-    const word = this.form.value;
+    const dateToday = new Date();
+    const newWord:Word ={
+      translate: this.form.value.translateWord,
+      createdAt: dateToday.toDateString(),
+      name:this.form.value.inputWord
+    } 
+    ;
     this.showModal.emit(false);
+    this.wordService.saveWord(newWord);
   }
 
 }

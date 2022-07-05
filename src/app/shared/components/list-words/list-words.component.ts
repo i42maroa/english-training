@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WordService } from 'src/app/core/services/word.service';
 import { Word } from '../../models/word.interface';
 
 @Component({
@@ -10,21 +11,14 @@ export class ListWordsComponent implements OnInit {
 
   wordsList:Word[] = [];
 
-  constructor() { }
+  constructor(
+    private readonly wordService:WordService
+  ) { }
 
   ngOnInit(): void {
-    this.wordsList = [
-      {
-        name:"do",
-        translate:"hacer",
-        createdAt:"04/07/2022"
-      },
-      {
-        name:"often",
-        translate:"a menudo",
-        createdAt:"04/07/2022"
-      }
-    ]
+    this.wordService.getListWords().subscribe(
+      dataList => this.wordsList = dataList
+    )
   }
 
 }
