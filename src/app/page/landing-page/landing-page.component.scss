@@ -27,11 +27,12 @@
 }
 
 .add_modal{
-    position: fixed;
+    position: absolute;
     left: 0;
     right: 0;
+    top: 0;
+    bottom: 0;
     margin: auto;
-    top: 100px;
     max-width: 450px;
 }
 

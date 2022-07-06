@@ -51,4 +51,8 @@ export class NewWordModalComponent implements OnInit {
     this.wordService.saveWord(newWord);
   }
 
+  closeModal(){
+    this.showModal.emit(false);
+  }
+
 }

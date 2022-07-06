@@ -1,13 +1,12 @@
 .float_button{
     border-radius: 100px;
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
+    border: none;
+    cursor: pointer;
+    color:#fff;
 }
 
 .add{
-    background-color: blue;
-}
-
-.cancel{
-    background-color: red;
+    background-color: var(--prominent-color-two);
 }
