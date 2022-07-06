@@ -5,7 +5,7 @@
     max-width: 500px;
     margin: 0 auto;
     position: relative;
-    background-color: var(--page-background);
+    background: linear-gradient(to top left, var(--page-background-one), var(--page-background-two));
     display: flex;
     flex-direction: column;
 }

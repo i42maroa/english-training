@@ -4,49 +4,61 @@
     margin: 1rem 2rem; 
     padding: 2rem; 
     border-radius: 5px;
-    background-color: var(--secondary-color);
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+}
+
+.modal_header{
+    display: flex;
+    width: 100%;
     position: relative;
+}
+
+.modal_header h3{
+    color: var(--secondary-color);
 }
 
 .close_item{
     position: absolute;
-    top: 1rem;
-    right: 1.5rem;
+    right: 0;
     font-weight: 800;
     font-size: 20px;
     cursor: pointer;
+    color: var(--secondary-color);
 }
 
 .form_container{
-    width: 100%;
-    margin: 1rem auto;
+    width: 90%;
+    margin: 2rem auto 1rem auto;
     display: flex;
     flex-direction: column;
 }
 
 
 .form_input:focus{
-    outline: 2px solid var(--prominent-color-two);
+    outline: 2px solid var(--main-color);
 }
 
 .form_container button{
     width: fit-content;
     height: fit-content;
-    margin: auto;
+    margin: 1rem auto 0 auto;
     border: none;
     border-radius: 10px;
     padding: 0.5rem 1rem;
     cursor:pointer;
-    background-color: var(--prominent-color-two);
+    background-color: var(--main-color);
     color: #fff;
 }
 
 .form_container button:disabled{
-    color: yellow; 
+    background-color: var(--secondary-color) ;
+    color: #ddd; 
+    cursor: not-allowed;
 }
 
 .icon_translate:hover{
-    fill: var(--prominent-color-two);
+    fill: var(--main-color);
 }
 
 .input_group{
@@ -56,15 +68,24 @@
 
 
 .icon_translate{
-    width: 30px;
-    margin: auto 0.5rem;
-    fill: var(--text-color);
+    width: 40px;
+    margin: auto 0 auto 1.5rem;
+    fill: var(--secondary-color);
 }
 
 .form_input{
-    margin: 1rem ;
+    margin: 1rem 0;
     padding: 1rem;
     border: none;
     border-radius: 10px;
-    width:100%;
+    width: 100%;
+    outline: 2px solid var(--secondary-color);
+}
+
+hr{
+    background-color: var(--secondary-color);
+    border: 0.1rem solid var(--secondary-color);
+    border-radius: 5px;
+    width: 80%;
+    margin-top: 0.5rem;
 }

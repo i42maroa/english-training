@@ -5,8 +5,9 @@
     border: none;
     cursor: pointer;
     color:#fff;
+    box-shadow: var(--box-shadow);
 }
 
 .add{
-    background-color: var(--prominent-color-two);
+    background: radial-gradient(var(--main-color),var(--main-color-shadow));
 }

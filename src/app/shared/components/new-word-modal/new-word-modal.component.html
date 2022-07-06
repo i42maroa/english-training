@@ -1,5 +1,8 @@
 <div class="modal_container">
-    <div class="close_item" (click)="closeModal()">X</div>
+    <div class="modal_header">
+        <h3>Add new word</h3>
+        <div class="close_item" (click)="closeModal()">X</div>
+    </div>
     <form [formGroup]="form" class="form_container">
         <div class="input_group">
             <input class="form_input" formControlName="inputWord" type="text" placeholder="Word">
