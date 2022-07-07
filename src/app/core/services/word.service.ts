@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Word } from 'src/app/shared/models/word.interface';
+import { FirestoreService } from './firestore/firestore.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WordService {
 
-  constructor() { }
+  readonly wordUrl = "word"
+
+  constructor(
+    private readonly firestore:FirestoreService
+  ) { }
 
   wordList:Word[] = [];
 
   saveWord(newWord:Word){
-    this.wordList.push(newWord);
+    return this.firestore.addWord(newWord);
   }
 
   getListWords(): Observable<Word[]>{
-    return of(this.wordList);
+    return this.firestore.getWord() as Observable<any>;
   }
 }
