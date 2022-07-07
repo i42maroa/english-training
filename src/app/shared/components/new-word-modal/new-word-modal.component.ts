@@ -48,7 +48,10 @@ export class NewWordModalComponent implements OnInit {
     } 
     ;
     this.showModal.emit(false);
-    this.wordService.saveWord(newWord);
+    this.wordService.saveWord(newWord).subscribe(
+      _ => console.log("correct"),
+      _=> console.log("false")
+    );
   }
 
   closeModal(){
