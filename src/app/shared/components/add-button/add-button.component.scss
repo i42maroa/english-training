@@ -1,0 +1,21 @@
+.float_button{
+    border-radius: 100px;
+    width: 4rem;
+    height: 4rem;
+    border: none;
+    cursor: pointer;
+    color:#fff;
+    box-shadow: var(--box-shadow);
+    font-size: 40px;
+    text-align: center;
+    
+}
+
+.add{
+    transition: width 2s linear 1s;
+    background: linear-gradient(to bottom right,var(--main-color),var(--secondary-color));
+}
+
+.add:hover{
+    background: linear-gradient(to bottom right,var(--main-color),var(--main-color));
+}

@@ -1,0 +1,43 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 1rem;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+.container h2{
+    text-align: left;
+}
+
+hr{
+    height:0;
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.not_values{
+    text-align: center;
+    padding: 1rem 0;
+    font-style: italic;
+}
+
+.line{
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem 0;
+    
+}
+
+.line p{
+    margin: 0 auto;
+}
+
+.strong_word{
+    font-weight: bold;
+    color: var(--secondary-color);
+}

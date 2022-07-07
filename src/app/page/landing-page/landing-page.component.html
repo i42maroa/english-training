@@ -1,0 +1,7 @@
+<div class="page_container">
+    
+    <app-list-words></app-list-words>
+    
+    <app-new-word-modal *ngIf="showModal" class="add_modal"  (showModal)="addModal($event)"></app-new-word-modal>
+    <app-add-button class="add_button" [show]="showModal" (showModal)="addModal($event)"></app-add-button>
+</div>

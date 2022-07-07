@@ -1,0 +1,12 @@
+.header_container{
+    width: 100%;
+    height: fit-content;
+    background: linear-gradient(to bottom, var(--main-color), var(--secondary-color));
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.header_container h1{
+    color: #fff;
+    text-align: left;
+    padding-left: 1rem;
+}
