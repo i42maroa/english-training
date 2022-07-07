@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Word } from 'src/app/shared/models/word.interface';
 import { FirestoreService } from './firestore/firestore.service';
 
@@ -16,11 +16,11 @@ export class WordService {
 
   wordList:Word[] = [];
 
-  saveWord(newWord:Word):Observable<any>{
-    return this.firestore.post(this.wordUrl, newWord);
+  saveWord(newWord:Word){
+    return this.firestore.addWord(newWord);
   }
 
   getListWords(): Observable<Word[]>{
-    return this.firestore.get(this.wordUrl);
+    return this.firestore.getWord() as Observable<any>;
   }
 }

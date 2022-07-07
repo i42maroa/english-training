@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { WordService } from 'src/app/core/services/word.service';
 import { Word } from '../../models/word.interface';
 
@@ -48,10 +48,7 @@ export class NewWordModalComponent implements OnInit {
     } 
     ;
     this.showModal.emit(false);
-    this.wordService.saveWord(newWord).subscribe(
-      _ => console.log("correct"),
-      _=> console.log("false")
-    );
+    this.wordService.saveWord(newWord);
   }
 
   closeModal(){

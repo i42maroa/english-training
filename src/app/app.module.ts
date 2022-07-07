@@ -11,6 +11,10 @@ import { ListWordsComponent } from './shared/components/list-words/list-words.co
 import { AddButtonComponent } from './shared/components/add-button/add-button.component';
 import { HeaderComponent } from './core/components/header/header.component';
 
+import { provideFirestore, getFirestore} from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp} from '@angular/fire/app';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +29,9 @@ import { HeaderComponent } from './core/components/header/header.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]

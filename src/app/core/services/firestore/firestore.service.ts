@@ -2,68 +2,27 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Params } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Word } from 'src/app/shared/models/word.interface';
+import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
 
-  readonly fireBaseUrl="https://english-training-9d2bb-default-rtdb.europe-west1.firebasedatabase.app/";
+  constructor( 
+    private readonly firestore:Firestore ) { }
 
-  constructor( private readonly http:HttpClient ) { }
 
-  /**
-   * 
-   * 
-   * @param path 
-   * @param params 
-   * @param headers 
-   * @returns 
-   */
-  public get<T>(path: string, params?: Params, headers?:Params): Observable<T> {
-    return this.http.get<T>(this.path(path), {...headers, params });
-  }
+    addWord(word:Word){
+      const place = collection(this.firestore, 'word');
+      return addDoc(place, word) 
+    }
 
-  /**
-   * Put http method with body. Returns Observable
-   * 
-   * @param path 
-   * @param body 
-   * @returns 
-   */
-  public put<T>(path: string, body: Record<string, any> = {}): Observable<any> {
-    return this.http.post<T>(this.path(path), body);
-  }
+    getWord(): Observable<Word[]>{
 
-  /**
-   * Http post method with body. returns Observable.
-   * 
-   * @param path 
-   * @param body 
-   * @returns 
-   */
-  public post<T>(path: string, body: Record<string, any> = {}): Observable<T> {
-    return this.http.post<T>(this.path(path), body);
-  }
-
-  /**
-   * Https delete method. Without body. Returns Observable
-   * 
-   * @param path 
-   * @param body 
-   * @returns 
-   */
-  public delete<T>(path: string, body: Record<string, any> = {}): Observable<T> {
-    return this.http.delete<T>(this.path(path), body);
-  }
-
-  /**
-   * Gets de path with the environment base url
-   * 
-   * @param path 
-   * @returns 
-   */
-  public path(path: string): string {
-    return `${this.fireBaseUrl}${path}`
-  }
+      const place = collection(this.firestore, 'word');
+      return collectionData(place) as Observable<Word[]>
+    }
+ 
 }
