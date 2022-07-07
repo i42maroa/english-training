@@ -6,8 +6,16 @@
     cursor: pointer;
     color:#fff;
     box-shadow: var(--box-shadow);
+    font-size: 40px;
+    text-align: center;
+    
 }
 
 .add{
-    background: radial-gradient(var(--main-color),var(--main-color-shadow));
+    transition: width 2s linear 1s;
+    background: linear-gradient(to bottom right,var(--main-color),var(--secondary-color));
+}
+
+.add:hover{
+    background: linear-gradient(to bottom right,var(--main-color),var(--main-color));
 }

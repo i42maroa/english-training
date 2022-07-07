@@ -8,10 +8,11 @@
     background: linear-gradient(to top left, var(--page-background-one), var(--page-background-two));
     display: flex;
     flex-direction: column;
+    box-shadow: var(--box-shadow-page);
 }
 
 .background{
-    background-color: var(--shadow-background);
+    background: linear-gradient(to top left, var(--background-color-one), var(--background-color-two));
     width: 100%;
     height: 100%;
     padding: 0;

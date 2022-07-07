@@ -4,6 +4,7 @@
     position: relative;
 }
 
+
 .buttons-container{
     display: flex;
     
@@ -22,12 +23,13 @@
 
 .add_button{
     position: absolute;
-    bottom: 5px;
-    right: 2px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+   
 }
 
 .add_modal{
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     top: 0;
@@ -38,6 +40,7 @@
 
 @media (max-width: 500px) {
     .add_button{
-        right: 5px;
+        bottom: 1rem;
+        right: 1rem;
     }
 }
