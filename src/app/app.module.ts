@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import { NotificationSnackbarComponent } from './core/components/notification-snackbar/notification-snackbar.component';
 import { GlobalErrorHandlerService } from './core/services/error/global-error-handler.service';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
+import { WordModalComponent } from './core/components/word-modal/word-modal.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor
     ListWordsComponent,
     AddButtonComponent,
     HeaderComponent,
-    NotificationSnackbarComponent
+    NotificationSnackbarComponent,
+    WordModalComponent
   ],
   imports: [
     MatSnackBarModule,
