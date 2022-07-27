@@ -4,6 +4,10 @@
     <div class="line" *ngFor="let word of wordsList">
         <p class="strong_word">{{word.name}}</p>
         <p>{{word.translate}}</p>
+        <div *ngIf="editionMode">
+            <button (click)="updateWord(word)">M</button>
+            <button (click)="deleteWord(word.id!)">D</button>
+        </div>
     </div>
     <div *ngIf="wordsList.length === 0" class="not_values">
         Not values yet

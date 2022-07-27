@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Params } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Word } from 'src/app/shared/models/word.interface';
-import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, addDoc, deleteDoc, setDoc, doc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +18,17 @@ export class FirestoreService {
     }
 
     getWord(): Observable<Word[]>{
-
       const place = collection(this.firestore, 'word');
-      return collectionData(place) as Observable<Word[]>
+      return collectionData(place, {idField:'id'}) as Observable<Word[]>
     }
- 
+
+    deleteWord(id:string){
+      const place = doc(this.firestore, `word/${id}`);
+      return deleteDoc(place);  
+    }
+
+    updateWord(word:Word){
+      const place = doc(this.firestore, `word/${word.id}`);
+      return setDoc(place, word)
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { WordService } from 'src/app/core/services/word.service';
 import { Word } from '../../models/word.interface';
@@ -10,18 +10,22 @@ const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa
   templateUrl: './new-word-modal.component.html',
   styleUrls: ['./new-word-modal.component.scss']
 })
-export class NewWordModalComponent implements OnInit {
+export class NewWordModalComponent implements OnInit, OnChanges {
 
+  @Input() word?:Word = undefined; 
   @Output() showModal = new EventEmitter<boolean>();
+
   form!:FormGroup
   searchText:string = REVERSO_URL;
 
   sendButton:boolean = true;
   translateButton:boolean = true;
+  modalTitle:string = "";
 
   constructor(
     private readonly wordService:WordService
   ) { }
+
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -33,6 +37,18 @@ export class NewWordModalComponent implements OnInit {
       this.sendButton = !this.form.valid;
       this.translateButton = !this.form.value.inputWord ==! '';
       this.searchText = REVERSO_URL + this.form.value.inputWord });
+    
+    this.modalTitle = "Add new word";
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['word'].currentValue){
+      this.form.patchValue({
+        inputWord:this.word!.name,
+        translateWord:this.word!.translate
+      })
+      this.modalTitle = "Modify word";
+    }
   }
 
   translateWord(){
