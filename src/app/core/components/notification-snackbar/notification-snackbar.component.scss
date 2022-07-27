@@ -1,0 +1,40 @@
+::ng-deep .mat-snack-bar-container{
+    background-color: white;
+}
+
+.snack_container{
+    display: flex;
+    color:gray;
+    
+    .column_container{
+        flex-grow: 1;
+    }
+    .icon_container{
+        margin: auto 1rem auto 0;
+        mat-icon{
+            width: 4rem;
+            font-size: 4rem;
+        }
+        .success{
+            color: green;
+        }
+        .error{
+            color: red;
+        }
+    }
+    .notification_title{
+        font-size: 18px;
+    }
+    .message_container{
+        margin: auto;
+        p{
+            white-space: pre-wrap;
+        }
+    }
+    .close_container{
+        margin-left: 1rem;
+        mat-icon{
+            cursor: pointer;
+        }
+    }
+}
