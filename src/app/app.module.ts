@@ -20,6 +20,11 @@ import { NotificationSnackbarComponent } from './core/components/notification-sn
 import { GlobalErrorHandlerService } from './core/services/error/global-error-handler.service';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 import { WordModalComponent } from './core/components/word-modal/word-modal.component';
+import { StoreModule } from '@ngrx/store';
+import { ROOT_REDUCERS } from './state/app.state';
+import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { WordEffects } from './state/effects/words.effects';
 
 
 @NgModule({
@@ -34,6 +39,7 @@ import { WordModalComponent } from './core/components/word-modal/word-modal.comp
     WordModalComponent
   ],
   imports: [
+    
     MatSnackBarModule,
     MatIconModule,
     BrowserModule,
@@ -41,7 +47,14 @@ import { WordModalComponent } from './core/components/word-modal/word-modal.comp
     ReactiveFormsModule,
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({
+      maxAge:25,
+      logOnly:true,
+      autoPause:true
+    }),
+    EffectsModule.forRoot([WordEffects])
   ],
   entryComponents:[
     NotificationSnackbarComponent
