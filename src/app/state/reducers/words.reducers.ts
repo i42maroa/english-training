@@ -1,15 +1,20 @@
 import { createReducer, on } from '@ngrx/store';
 import { Word } from 'src/app/shared/models/word.interface';
-import { addWord, retrieveWordList } from '../actions/words.actions';
+import { WordState } from 'src/app/shared/models/word.state';
+import { addedWord, addWord, loadWords, retrieveWordList } from '../actions/words.actions';
 
-export const initialState:ReadonlyArray<Word> = [];
+export const initialState:WordState = { loading:true, words:[]};
 
 export const wordReducer = createReducer(
   initialState,
-  on(addWord, (oldState, {word}) =>{
-    return [...oldState, ...[word]]
+  // on(addedWord, (oldState, {word}) =>{
+  //   return [...oldState, ...[word]]
+  // }),
+  on(loadWords, (state) => {
+    return {...state, loading:true }
   }),
-  on(retrieveWordList, (oldState, {words}) => {
-    return [...oldState, ...words]
+  on(retrieveWordList, (state, {words}) => {
+    return {...state, loading:false, words}
   })
 );
+

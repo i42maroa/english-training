@@ -1,9 +1,9 @@
 import {  ActionReducerMap } from "@ngrx/store";
-import { Word } from "../shared/models/word.interface";
+import { WordState } from "../shared/models/word.state";
 import { wordReducer } from "./reducers/words.reducers";
 
 export interface AppState {
-    words: ReadonlyArray<Word>
+    words: WordState,
 }
 
 export const ROOT_REDUCERS: ActionReducerMap<AppState> = {

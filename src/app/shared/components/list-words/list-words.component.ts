@@ -2,9 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FirestoreService } from 'src/app/core/services/firestore/firestore.service';
-import { WordService } from 'src/app/core/services/word.service';
 import { loadWords, retrieveWordList } from 'src/app/state/actions/words.actions';
-import { selectWords } from 'src/app/state/selectors/words.selectors';
+import { selectWords, selectWordsFeature } from 'src/app/state/selectors/words.selectors';
 import { Word } from '../../models/word.interface';
 
 @Component({
@@ -22,7 +21,6 @@ export class ListWordsComponent implements OnInit {
   isDeleteModalShow:boolean = false;
 
   constructor(
-    private readonly wordService:WordService,
     private readonly firestore:FirestoreService,
     private readonly store:Store
   ) { 
@@ -30,11 +28,6 @@ export class ListWordsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.wordService.getListWords().subscribe(
-    //   dataList =>{
-    //     this.store.dispatch(retrieveWordList({words:dataList}))
-    //     this.wordsList = dataList
-    //   }  )
     this.store.dispatch(loadWords());
   }
 
@@ -44,7 +37,6 @@ export class ListWordsComponent implements OnInit {
 
   async deleteWord(id:string){
     const resp = await this.firestore.deleteWord(id);
-    console.log(resp)
   }
 
   showDeleteModal(){
