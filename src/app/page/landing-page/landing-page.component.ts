@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectShowModalWord } from 'src/app/state/selectors/words.selectors';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,17 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  showModal:boolean = false;
+  showModal$:Observable<boolean> = new Observable<boolean>();
 
   constructor(
+    private readonly store:Store
   ) { }
 
   ngOnInit(): void {
-    this.showModal = false;
+    this.showModal$ = this.store.select(selectShowModalWord);
   }
-
-  addModal(show:boolean){
-    this.showModal = show;
-  }
-
 }

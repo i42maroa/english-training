@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Word } from 'src/app/shared/models/word.interface';
-import { Firestore, collectionData, collection, addDoc, deleteDoc, setDoc, doc } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, addDoc, deleteDoc, setDoc, doc, } from '@angular/fire/firestore';
+import { updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,10 @@ export class FirestoreService {
     }
 
     updateWord(word:Word){
-      const place = doc(this.firestore, `word/${word.id}`);
-      return setDoc(place, word)
+      console.log(word)
+      const place = doc(this.firestore, `word/${word.id!}`);
+
+      console.log(place)
+      return updateDoc(place, {...word})
     }
 }

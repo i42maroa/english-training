@@ -1,9 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { FirestoreService } from 'src/app/core/services/firestore/firestore.service';
-import { loadWords, retrieveWordList } from 'src/app/state/actions/words.actions';
-import { selectWords, selectWordsFeature } from 'src/app/state/selectors/words.selectors';
+import { closeEditButtons, deleteWord, loadWords, modalModifyWord, showEditButtons } from 'src/app/state/actions/words.actions';
+import { selectWords, selectShowEditButtons } from 'src/app/state/selectors/words.selectors';
 import { Word } from '../../models/word.interface';
 
 @Component({
@@ -13,34 +12,37 @@ import { Word } from '../../models/word.interface';
 })
 export class ListWordsComponent implements OnInit {
 
-  @Output() showModal:EventEmitter<boolean> = new EventEmitter<boolean>();
-
   wordsList:Word[] = [];
   wordList$:Observable<any> = new Observable();
-  editionMode:boolean = true;
-  isDeleteModalShow:boolean = false;
+  showEditButtons$:Observable<boolean> = new Observable<boolean>();
 
   constructor(
-    private readonly firestore:FirestoreService,
     private readonly store:Store
-  ) { 
-    this.wordList$ = this.store.select(selectWords);
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.wordList$ = this.store.select(selectWords);
+    this.showEditButtons$ = this.store.select(selectShowEditButtons);
     this.store.dispatch(loadWords());
   }
 
-  updateWord(word:any){
-    this.showModal.emit(true);
+  updateWord(word:Word){
+    this.store.dispatch(modalModifyWord({word}));
   }
 
-  async deleteWord(id:string){
-    const resp = await this.firestore.deleteWord(id);
+  deleteWord(idWord:string){
+    this.store.dispatch(deleteWord({idWord}))
   }
 
-  showDeleteModal(){
-    this.isDeleteModalShow = true;
+  // showDeleteModal(){
+  //   this.isDeleteModalShow = true;
+  // }
+
+  showEditButtons(){
+    this.store.dispatch(showEditButtons());
   }
 
+  closeEditButtons(){
+    this.store.dispatch(closeEditButtons());
+  }
 }

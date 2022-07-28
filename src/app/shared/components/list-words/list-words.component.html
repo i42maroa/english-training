@@ -1,10 +1,12 @@
 <div class="container">
     <h2>Word List</h2>
+        <button *ngIf="!(showEditButtons$ | async)" (click)="showEditButtons()">E</button>
+        <button *ngIf="showEditButtons$ | async" (click)="closeEditButtons()">X</button>
     <hr>
     <div class="line" *ngFor="let word of wordList$ | async">
         <p class="strong_word">{{word.name}}</p>
         <p>{{word.translate}}</p>
-        <div *ngIf="editionMode">
+        <div *ngIf="showEditButtons$ | async">
             <button (click)="updateWord(word)">M</button>
             <button (click)="deleteWord(word.id!)">D</button>
         </div>

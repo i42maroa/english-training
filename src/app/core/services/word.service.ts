@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { Word } from 'src/app/shared/models/word.interface';
 import { FirestoreService } from './firestore/firestore.service';
 
@@ -17,7 +17,11 @@ export class WordService {
   wordList:Word[] = [];
 
   saveWord(newWord:Word){
-    return this.firestore.addWord(newWord);
+    return from(this.firestore.addWord(newWord));
+  }
+
+  updateWord(newWord:Word){
+    return from(this.firestore.updateWord(newWord));
   }
 
   getListWords(): Observable<Word[]>{
@@ -25,6 +29,6 @@ export class WordService {
   }
 
   deleteWord(id:string){
-    return this.firestore.deleteWord(id);
+    return from(this.firestore.deleteWord(id));
   }
 }

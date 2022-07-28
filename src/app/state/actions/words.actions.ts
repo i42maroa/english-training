@@ -1,9 +1,21 @@
 import { createAction, props } from '@ngrx/store';
 import { Word } from 'src/app/shared/models/word.interface';
 
-export const addWord = createAction('[Word list] Add word');
-export const addedWord = createAction('[Word list] Added word', props<{word:Word}>());
-export const modWord = createAction('[Word list] Modify word', props<{word:Word}>());
-export const moddedWord = createAction('[Word list] Modified word', props<{word:Word}>());
+export const modalAddWord = createAction('[Modal word] show modal word');
+export const closeModalWord = createAction('[Modal word] close modal word');
+export const modalModifyWord = createAction('[Modal word] show modify modal word', props<{word:Word}>());
+
+export const showEditButtons = createAction('[Edit buttons] show edit buttons');
+export const closeEditButtons = createAction('[Edit buttons] close edit buttons');
+
+export const addWord = createAction('[Word list] try add word', props<{word:Word}>());
+export const addedWord = createAction('[Word list] word added');
+
+export const modifyWord = createAction('[Word list] try modify word', props<{word:Word}>());
+export const modifiedWord = createAction('[Word list] word modified');
+
+export const deleteWord = createAction('[Word list] try delete word', props<{idWord:string}>());
+export const deletedWord = createAction('[Word list] word deleted');
+
 export const loadWords = createAction('[Word list] Load words');
 export const retrieveWordList = createAction('[Word list] retrieve words success', props<{words: ReadonlyArray<Word>}>());
