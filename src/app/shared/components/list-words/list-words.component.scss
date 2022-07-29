@@ -37,14 +37,18 @@ hr{
 }
 
 .line{
-    display: flex;
-    flex-direction: row;
-    margin: 0.5rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)), 1fr;
+    justify-items: center;
+    // flex-direction: row;
+     margin: 0.5rem 0;
     
 }
 
 .line p{
-    margin: auto;
+    margin: 0.3rem auto;
+    text-align: left;
 }
 
 .strong_word{
@@ -59,6 +63,12 @@ hr{
     fill: var(--secondary-color);
 }
 
+.edit_container{
+    // width: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .edition_icon{
-    margin: 0.5rem 0;
+    margin:  0.3rem;
 }
