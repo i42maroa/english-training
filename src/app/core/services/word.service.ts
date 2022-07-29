@@ -25,7 +25,7 @@ export class WordService {
   }
 
   getListWords(): Observable<Word[]>{
-    return this.firestore.getWord() as Observable<Word[]>;
+    return from(this.firestore.getWord()) as Observable<Word[]>;
   }
 
   deleteWord(id:string){

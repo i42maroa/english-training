@@ -60,9 +60,9 @@ export class NewWordModalComponent implements OnInit {
     const dateToday = new Date();
     const newWord:Word = {
       id: this.isMod? this.idPrecharge : "",
-      translate: this.form.value.translateWord,
+      translate: this.form.value.translateWord.toLowerCase(),
       createdAt: dateToday.toDateString(),
-      name:this.form.value.inputWord
+      name:this.form.value.inputWord.toLowerCase()
     };
 
     this.isMod ?
