@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { addWord, closeModalWord, modifyWord } from 'src/app/state/actions/words.actions';
+import { addWord, closeAddModalWord, closeModifyModalWord, modifyWord } from 'src/app/state/actions/words.actions';
 import { selectModalWord, selectWordModalWordId } from 'src/app/state/selectors/words.selectors';
 import { Word } from '../../models/word.interface';
 
@@ -71,6 +71,8 @@ export class NewWordModalComponent implements OnInit {
   }
 
   closeModal(){
-    this.store.dispatch(closeModalWord());
+    this.isMod ?
+      this.store.dispatch(closeModifyModalWord()):
+      this.store.dispatch(closeAddModalWord());
   }
 }

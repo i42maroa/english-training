@@ -1,6 +1,6 @@
 .page_container{
     width: 100%;
-    height: 85vh;
+    min-height: 85vh;
     position: relative;
 }
 
@@ -22,10 +22,9 @@
 }
 
 .add_button{
-    position: absolute;
+    position: fixed;
     bottom: 3rem;
-    right: 3rem;
-   
+    right: 3rem; 
 }
 
 .add_modal{

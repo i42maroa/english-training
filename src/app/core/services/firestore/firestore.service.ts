@@ -29,10 +29,7 @@ export class FirestoreService {
     }
 
     updateWord(word:Word){
-      console.log(word)
       const place = doc(this.firestore, `word/${word.id!}`);
-
-      console.log(place)
       return updateDoc(place, {...word})
     }
 }

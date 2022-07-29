@@ -2,8 +2,9 @@ import { createAction, props } from '@ngrx/store';
 import { Word } from 'src/app/shared/models/word.interface';
 
 export const modalAddWord = createAction('[Modal word] show modal word');
-export const closeModalWord = createAction('[Modal word] close modal word');
+export const closeAddModalWord = createAction('[Modal word] close add modal word');
 export const modalModifyWord = createAction('[Modal word] show modify modal word', props<{word:Word}>());
+export const closeModifyModalWord = createAction('[Modal word] close modify modal word');
 
 export const showEditButtons = createAction('[Edit buttons] show edit buttons');
 export const closeEditButtons = createAction('[Edit buttons] close edit buttons');
