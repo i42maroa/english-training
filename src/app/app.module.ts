@@ -1,7 +1,10 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatIconModule } from '@angular/material/icon'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,10 +13,19 @@ import { NewWordModalComponent } from './shared/components/new-word-modal/new-wo
 import { ListWordsComponent } from './shared/components/list-words/list-words.component';
 import { AddButtonComponent } from './shared/components/add-button/add-button.component';
 import { HeaderComponent } from './core/components/header/header.component';
-
 import { provideFirestore, getFirestore} from '@angular/fire/firestore';
+
 import { initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import { environment } from 'src/environments/environment';
+import { NotificationSnackbarComponent } from './core/components/notification-snackbar/notification-snackbar.component';
+import { GlobalErrorHandlerService } from './core/services/error/global-error-handler.service';
+import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
+import { WordModalComponent } from './core/components/word-modal/word-modal.component';
+import { StoreModule } from '@ngrx/store';
+import { ROOT_REDUCERS } from './state/app.state';
+import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { WordEffects } from './state/effects/words.effects';
 
 
 @NgModule({
@@ -23,17 +35,39 @@ import { environment } from 'src/environments/environment';
     NewWordModalComponent,
     ListWordsComponent,
     AddButtonComponent,
-    HeaderComponent
+    HeaderComponent,
+    NotificationSnackbarComponent,
+    WordModalComponent
   ],
   imports: [
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    MatIconModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({
+      maxAge:25,
+      logOnly:true,
+      autoPause:true
+    }),
+    EffectsModule.forRoot([WordEffects])
   ],
-  providers: [],
+  entryComponents:[
+    NotificationSnackbarComponent
+  ],
+  providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandlerService},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

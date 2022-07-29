@@ -8,9 +8,19 @@
     box-shadow: var(--box-shadow);
 }
 
-.container h2{
+.header_container h2{
     text-align: left;
 }
+
+.header_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header_container .icon{
+    margin: auto 0;
+}
+
 
 hr{
     height:0;
@@ -34,10 +44,21 @@ hr{
 }
 
 .line p{
-    margin: 0 auto;
+    margin: auto;
 }
 
 .strong_word{
     font-weight: bold;
     color: var(--secondary-color);
+}
+
+.icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    fill: var(--secondary-color);
+}
+
+.edition_icon{
+    margin: 0.5rem 0;
 }

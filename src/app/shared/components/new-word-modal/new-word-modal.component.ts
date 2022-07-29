@@ -1,6 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { WordService } from 'src/app/core/services/word.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { addWord, closeAddModalWord, closeModifyModalWord, modifyWord } from 'src/app/state/actions/words.actions';
+import { selectModalWord, selectWordModalWordId } from 'src/app/state/selectors/words.selectors';
 import { Word } from '../../models/word.interface';
 
 const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa&text=';
@@ -12,15 +15,18 @@ const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa
 })
 export class NewWordModalComponent implements OnInit {
 
-  @Output() showModal = new EventEmitter<boolean>();
   form!:FormGroup
   searchText:string = REVERSO_URL;
-
   sendButton:boolean = true;
   translateButton:boolean = true;
+  modalTitle:string = "";
+  wordPreloaded:Observable<Word> = new Observable<Word>();
+
+  isMod:boolean = false;
+  idPrecharge?:string = "";
 
   constructor(
-    private readonly wordService:WordService
+    private readonly store:Store
   ) { }
 
   ngOnInit(): void {
@@ -33,26 +39,40 @@ export class NewWordModalComponent implements OnInit {
       this.sendButton = !this.form.valid;
       this.translateButton = !this.form.value.inputWord ==! '';
       this.searchText = REVERSO_URL + this.form.value.inputWord });
-  }
+    
+    this.store.select(selectModalWord).subscribe( modalStatus => {
+      
+      this.modalTitle = modalStatus.type === 'new'? "Add new word" : "Modify word";
+      this.isMod = modalStatus.type === 'new'? false:true;
 
-  translateWord(){
-    const word = this.form.value.inputWord;
+      if(modalStatus.wordPrecharged){
+        this.form.patchValue({
+          inputWord: modalStatus.wordPrecharged!.name,
+          translateWord: modalStatus.wordPrecharged!.translate
+        })
+
+        this.idPrecharge = modalStatus.wordPrecharged!.id!
+      }  
+    })
   }
 
   saveWord(){
     const dateToday = new Date();
-    const newWord:Word ={
+    const newWord:Word = {
+      id: this.isMod? this.idPrecharge : "",
       translate: this.form.value.translateWord,
       createdAt: dateToday.toDateString(),
       name:this.form.value.inputWord
-    } 
-    ;
-    this.showModal.emit(false);
-    this.wordService.saveWord(newWord);
+    };
+
+    this.isMod ?
+      this.store.dispatch(modifyWord({word:newWord})):
+      this.store.dispatch(addWord({word:newWord}))
   }
 
   closeModal(){
-    this.showModal.emit(false);
+    this.isMod ?
+      this.store.dispatch(closeModifyModalWord()):
+      this.store.dispatch(closeAddModalWord());
   }
-
 }

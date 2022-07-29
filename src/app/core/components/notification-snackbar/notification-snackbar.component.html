@@ -1,0 +1,16 @@
+<div class="snack_container">
+    <div class="column_container icon_container">
+        <mat-icon [ngClass]="data.snackType">{{ getIcon }}</mat-icon>
+    </div>
+    <div class="column_container message_container">
+        <strong>
+            <p class="notification_title" *ngIf="data.title">{{ data.title }}</p>
+        </strong>
+        <p *ngIf="data.message">{{ data.message }}</p>
+    </div>
+    <div
+        *ngIf="data.closeSnackbar !== undefined"
+        class="column_container close_container">
+        <mat-icon (click)="closeSnackbar()">close</mat-icon>
+    </div>
+</div>
