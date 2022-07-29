@@ -2,4 +2,5 @@
     <app-list-words></app-list-words>   
     <app-new-word-modal *ngIf="showModal$ | async" class="add_modal"></app-new-word-modal>
     <app-add-button class="add_button"></app-add-button>
+    <button (click)="export()">export</button>
 </div>
