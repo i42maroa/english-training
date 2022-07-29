@@ -66,6 +66,6 @@ export class WordService {
     }
 
     const pdf = pdfMake.createPdf(pdfCreate);
-    pdf.open()
+    pdf.download()
   }
 }
