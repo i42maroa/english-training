@@ -37,6 +37,12 @@
     max-width: 500px;
 }
 
+.export_button{
+    width: 1.5rem;
+    fill: var(--secondary-color);
+    margin: 0 auto
+}
+
 @media (max-width: 500px) {
     .add_button{
         bottom: 1rem;
