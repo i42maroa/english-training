@@ -26,6 +26,7 @@ import { ROOT_REDUCERS } from './state/app.state';
 import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { WordEffects } from './state/effects/words.effects';
+import { TypeWordListSelectorComponent } from './shared/components/type-word-list-selector/type-word-list-selector.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { WordEffects } from './state/effects/words.effects';
     AddButtonComponent,
     HeaderComponent,
     NotificationSnackbarComponent,
-    WordModalComponent
+    WordModalComponent,
+    TypeWordListSelectorComponent
   ],
   imports: [
     BrowserAnimationsModule,

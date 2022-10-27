@@ -34,10 +34,11 @@ export class WordModalComponent implements OnInit {
       typeWord: new FormControl('', Validators.required),
     });
 
-    this.form.valueChanges.subscribe(_=>{
+    this.form.valueChanges.subscribe(_ => {
       this.sendButton = !this.form.valid;
       this.translateButton = !this.form.value.inputWord ==! '';
-      this.searchText = REVERSO_URL + this.form.value.inputWord });
+      this.searchText = REVERSO_URL + this.form.value.inputWord 
+    });
     
     this.modalTitle = "Add new word";
   }

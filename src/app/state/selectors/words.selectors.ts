@@ -37,3 +37,8 @@ export const selectWordModalWordId = createSelector(
     selectWordsFeature,
     (state:WordState) => state.modalWord.wordPrecharged!.id!
 )
+
+export const selectWordTypeSearch = createSelector(
+    selectWordsFeature,
+    (state:WordState) => state.typeWordSearch
+)

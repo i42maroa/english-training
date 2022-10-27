@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
+import { WORD_TYPE } from 'src/app/shared/models/word.interface';
 import { PREDIFINED_WORD_STATE, WordState } from 'src/app/shared/models/word.state';
-import { addedWord, modalAddWord,  loadWords, modalModifyWord, retrieveWordList, addWord, modifyWord, modifiedWord, deleteWord, deletedWord, showEditButtons, closeEditButtons, closeAddModalWord, closeModifyModalWord } from '../actions/words.actions';
+import { addedWord, modalAddWord,  loadWords, modalModifyWord, retrieveWordList, addWord, modifyWord, modifiedWord, deleteWord, deletedWord, showEditButtons, closeEditButtons, closeAddModalWord, closeModifyModalWord, nextTypeWord, prevTypeWord } from '../actions/words.actions';
 
 export const initialState:WordState = PREDIFINED_WORD_STATE;
 
@@ -47,6 +48,16 @@ export const wordReducer = createReducer(
   }),
   on(retrieveWordList, (state, {words}) => {
     return {...state, loading:false, words}
+  }),
+  on(nextTypeWord, (state) => {
+    const index = WORD_TYPE.findIndex(value => value.value === state.typeWordSearch);
+    const new_index = (index + 1) % WORD_TYPE.length;
+    return {...state, typeWordSearch: WORD_TYPE[new_index].value }
+  }),
+  on(prevTypeWord, (state) => {
+    const index = WORD_TYPE.findIndex(value => value.value === state.typeWordSearch);
+    const new_index = index === 0 ?  WORD_TYPE.length - 1 : (index - 1) % WORD_TYPE.length; 
+    return {...state, typeWordSearch: WORD_TYPE[new_index].value}
   })
 );
 

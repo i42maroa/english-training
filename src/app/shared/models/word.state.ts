@@ -1,4 +1,4 @@
-import { Word, WordType } from "./word.interface";
+import { Word, WordTypeSearch, WORD_TYPE_SEARCH } from "./word.interface";
 
 export interface ModalState{
     show:boolean,
@@ -11,7 +11,8 @@ export interface WordState{
     words:ReadonlyArray<Word>,
     modalWord:ModalState,
     showAddButton:boolean,
-    showEditButtons:boolean
+    showEditButtons:boolean,
+    typeWordSearch:WordTypeSearch
 }
 
 export const PREDIFINED_WORD_STATE:WordState = {
@@ -22,5 +23,6 @@ export const PREDIFINED_WORD_STATE:WordState = {
         type: 'new'
     },
     showAddButton:true,
-    showEditButtons:false
+    showEditButtons:false,
+    typeWordSearch: WORD_TYPE_SEARCH[0].value
 }
