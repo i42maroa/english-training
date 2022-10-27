@@ -31,6 +31,7 @@ export class WordModalComponent implements OnInit {
     this.form = new FormGroup({
       inputWord: new FormControl('', Validators.required),
       translateWord: new FormControl('', Validators.required),
+      typeWord: new FormControl('', Validators.required),
     });
 
     this.form.valueChanges.subscribe(_=>{
@@ -60,7 +61,8 @@ export class WordModalComponent implements OnInit {
     const newWord:Word ={
       translate: this.form.value.translateWord,
       createdAt: dateToday.toDateString(),
-      name:this.form.value.inputWord
+      name:this.form.value.inputWord,
+      worldType:'noun'
     } 
     ;
     this.showModal.emit(false);

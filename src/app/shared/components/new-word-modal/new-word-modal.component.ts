@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { addWord, closeAddModalWord, closeModifyModalWord, modifyWord } from 'src/app/state/actions/words.actions';
 import { selectModalWord, selectWordModalWordId } from 'src/app/state/selectors/words.selectors';
-import { Word } from '../../models/word.interface';
+import { Word, WordType, WORD_TYPE } from '../../models/word.interface';
 
 const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa&text=';
 
@@ -25,6 +25,8 @@ export class NewWordModalComponent implements OnInit {
   isMod:boolean = false;
   idPrecharge?:string = "";
 
+  optionSelect: {label:string; value:WordType}[] = WORD_TYPE;
+
   constructor(
     private readonly store:Store
   ) { }
@@ -33,12 +35,14 @@ export class NewWordModalComponent implements OnInit {
     this.form = new FormGroup({
       inputWord: new FormControl('', Validators.required),
       translateWord: new FormControl('', Validators.required),
+      typeWord: new FormControl('', Validators.required),
     });
 
     this.form.valueChanges.subscribe(_=>{
       this.sendButton = !this.form.valid;
       this.translateButton = !this.form.value.inputWord ==! '';
-      this.searchText = REVERSO_URL + this.form.value.inputWord });
+      this.searchText = REVERSO_URL + this.form.value.inputWord 
+    });
     
     this.store.select(selectModalWord).subscribe( modalStatus => {
       
@@ -48,7 +52,8 @@ export class NewWordModalComponent implements OnInit {
       if(modalStatus.wordPrecharged){
         this.form.patchValue({
           inputWord: modalStatus.wordPrecharged!.name,
-          translateWord: modalStatus.wordPrecharged!.translate
+          translateWord: modalStatus.wordPrecharged!.translate,
+          typeWord: modalStatus.wordPrecharged!.worldType
         })
 
         this.idPrecharge = modalStatus.wordPrecharged!.id!
@@ -62,7 +67,8 @@ export class NewWordModalComponent implements OnInit {
       id: this.isMod? this.idPrecharge : "",
       translate: this.form.value.translateWord.toLowerCase(),
       createdAt: dateToday.toDateString(),
-      name:this.form.value.inputWord.toLowerCase()
+      name:this.form.value.inputWord.toLowerCase(),
+      worldType:this.form.value.typeWord
     };
 
     this.isMod ?

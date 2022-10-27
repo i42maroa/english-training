@@ -1,4 +1,4 @@
-import { Word } from "./word.interface";
+import { Word, WordType } from "./word.interface";
 
 export interface ModalState{
     show:boolean,
