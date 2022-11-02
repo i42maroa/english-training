@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { closeEditButtons, deleteWord, loadWords, modalModifyWord, showEditButtons } from 'src/app/state/actions/words.actions';
-import { selectWords, selectShowEditButtons } from 'src/app/state/selectors/words.selectors';
-import { Word } from '../../models/word.interface';
+import { selectWords, selectShowEditButtons, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
+import { Word, WordTypeSearch } from '../../models/word.interface';
 
 @Component({
   selector: 'app-list-words',
@@ -14,6 +14,7 @@ export class ListWordsComponent implements OnInit {
 
   wordsList:Word[] = [];
   wordList$:Observable<any> = new Observable();
+  wordType$:Observable<number> = new Observable<number>();
   showEditButtons$:Observable<boolean> = new Observable<boolean>();
 
   constructor(
@@ -23,6 +24,7 @@ export class ListWordsComponent implements OnInit {
   ngOnInit(): void {
     this.wordList$ = this.store.select(selectWords);
     this.showEditButtons$ = this.store.select(selectShowEditButtons);
+    this.wordType$ = this.store.select(selectWordTypeSearch);
     this.store.dispatch(loadWords());
   }
 

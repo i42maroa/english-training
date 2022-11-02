@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { WORD_TYPE_SEARCH } from "src/app/shared/models/word.interface";
 import { WordState } from "src/app/shared/models/word.state";
 
 export const selectWordsFeature = createFeatureSelector<WordState>(`words`);
@@ -41,4 +42,9 @@ export const selectWordModalWordId = createSelector(
 export const selectWordTypeSearch = createSelector(
     selectWordsFeature,
     (state:WordState) => state.typeWordSearch
+)
+
+export const selectWordTypeSearchName = createSelector(
+  selectWordsFeature,
+  (state:WordState) => WORD_TYPE_SEARCH[state.typeWordSearch].label
 )

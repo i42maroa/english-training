@@ -12,11 +12,11 @@ export interface WordState{
     modalWord:ModalState,
     showAddButton:boolean,
     showEditButtons:boolean,
-    typeWordSearch:WordTypeSearch
+    typeWordSearch:number
 }
 
 export const PREDIFINED_WORD_STATE:WordState = {
-    loading:false, 
+    loading:false,
     words:[],
     modalWord:{
         show:false,
@@ -24,5 +24,5 @@ export const PREDIFINED_WORD_STATE:WordState = {
     },
     showAddButton:true,
     showEditButtons:false,
-    typeWordSearch: WORD_TYPE_SEARCH[0].value
+    typeWordSearch: 0
 }

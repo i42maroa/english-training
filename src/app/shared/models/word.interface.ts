@@ -2,7 +2,7 @@ export interface Word{
     id?:string,
     name:string,
     translate:string,
-    worldType:WordType,
+    wordType:WordType,
     createdAt:string
 }
 

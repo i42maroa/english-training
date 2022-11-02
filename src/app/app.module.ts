@@ -27,6 +27,8 @@ import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { WordEffects } from './state/effects/words.effects';
 import { TypeWordListSelectorComponent } from './shared/components/type-word-list-selector/type-word-list-selector.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestore, AngularFirestoreModule } from "@angular/fire/compat/firestore";
 
 
 @NgModule({
@@ -49,6 +51,8 @@ import { TypeWordListSelectorComponent } from './shared/components/type-word-lis
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     StoreModule.forRoot(ROOT_REDUCERS),

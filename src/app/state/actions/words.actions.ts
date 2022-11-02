@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Word, WordType } from 'src/app/shared/models/word.interface';
+import { Word, WordTypeSearch } from 'src/app/shared/models/word.interface';
 
 export const modalAddWord = createAction('[Modal word] show modal word');
 export const closeAddModalWord = createAction('[Modal word] close add modal word');
@@ -21,5 +21,5 @@ export const deletedWord = createAction('[Word list] word deleted');
 export const loadWords = createAction('[Word list] Load words');
 export const retrieveWordList = createAction('[Word list] retrieve words success', props<{words: ReadonlyArray<Word>}>());
 
-export const nextTypeWord = createAction('[Change word type] next word type');
-export const prevTypeWord = createAction('[Change word type] previous word type');
+export const nextTypeWord = createAction('[Change word type] try next word type');
+export const prevTypeWord = createAction('[Change word type] try previous word type');

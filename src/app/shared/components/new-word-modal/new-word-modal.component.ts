@@ -37,15 +37,14 @@ export class NewWordModalComponent implements OnInit {
       translateWord: new FormControl('', Validators.required),
       typeWord: new FormControl('', Validators.required),
     });
-
     this.form.valueChanges.subscribe(_=>{
       this.sendButton = !this.form.valid;
       this.translateButton = !this.form.value.inputWord ==! '';
-      this.searchText = REVERSO_URL + this.form.value.inputWord 
+      this.searchText = REVERSO_URL + this.form.value.inputWord
     });
-    
+
     this.store.select(selectModalWord).subscribe( modalStatus => {
-      
+
       this.modalTitle = modalStatus.type === 'new'? "Add new word" : "Modify word";
       this.isMod = modalStatus.type === 'new'? false:true;
 
@@ -53,11 +52,11 @@ export class NewWordModalComponent implements OnInit {
         this.form.patchValue({
           inputWord: modalStatus.wordPrecharged!.name,
           translateWord: modalStatus.wordPrecharged!.translate,
-          typeWord: modalStatus.wordPrecharged!.worldType
+          typeWord: modalStatus.wordPrecharged!.wordType
         })
 
         this.idPrecharge = modalStatus.wordPrecharged!.id!
-      }  
+      }
     })
   }
 
@@ -68,7 +67,7 @@ export class NewWordModalComponent implements OnInit {
       translate: this.form.value.translateWord.toLowerCase(),
       createdAt: dateToday.toDateString(),
       name:this.form.value.inputWord.toLowerCase(),
-      worldType:this.form.value.typeWord
+      wordType:this.form.value.typeWord
     };
 
     this.isMod ?

@@ -12,7 +12,7 @@ const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa
 })
 export class WordModalComponent implements OnInit {
 
-  @Input() word?:Word = undefined; 
+  @Input() word?:Word = undefined;
   @Output() showModal = new EventEmitter<boolean>();
 
   form!:FormGroup
@@ -37,9 +37,9 @@ export class WordModalComponent implements OnInit {
     this.form.valueChanges.subscribe(_ => {
       this.sendButton = !this.form.valid;
       this.translateButton = !this.form.value.inputWord ==! '';
-      this.searchText = REVERSO_URL + this.form.value.inputWord 
+      this.searchText = REVERSO_URL + this.form.value.inputWord
     });
-    
+
     this.modalTitle = "Add new word";
   }
 
@@ -63,8 +63,8 @@ export class WordModalComponent implements OnInit {
       translate: this.form.value.translateWord,
       createdAt: dateToday.toDateString(),
       name:this.form.value.inputWord,
-      worldType:'noun'
-    } 
+      wordType:'noun'
+    }
     ;
     this.showModal.emit(false);
     this.wordService.saveWord(newWord);

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { Word } from 'src/app/shared/models/word.interface';
+import { Word, WordType, WordTypeSearch } from 'src/app/shared/models/word.interface';
 import { FirestoreService } from './firestore/firestore.service';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
@@ -11,8 +11,6 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
   providedIn: 'root'
 })
 export class WordService {
-
-  readonly wordUrl = "word"
 
   constructor(
     private readonly firestore:FirestoreService
@@ -28,8 +26,8 @@ export class WordService {
     return from(this.firestore.updateWord(newWord));
   }
 
-  getListWords(): Observable<Word[]>{
-    return from(this.firestore.getWord()) as Observable<Word[]>;
+  getListWordsByType(): Observable<Word[]>{
+    return from(this.firestore.getWordByType()) as Observable<Word[]>;
   }
 
   deleteWord(id:string){
@@ -40,17 +38,17 @@ export class WordService {
 
     //[izq,arriba, der, abajo]
     const tableBody = [[
-      {text:'WORD', fontSize: 16, bold: true, color:'#661F33',  margin: [0, 5, 20, 5]}, 
+      {text:'WORD', fontSize: 16, bold: true, color:'#661F33',  margin: [0, 5, 20, 5]},
       {text:'TRANSLATION', fontSize: 16, bold: true, color:'#661F33', margin: [0, 5, 20, 5]}
     ]]
 
     wordList.forEach(word =>{
       tableBody.push([
-        {text:word.name, fontSize: 12, bold:false, color:'#30362F', margin: [0, 5, 20, 5]}, 
+        {text:word.name, fontSize: 12, bold:false, color:'#30362F', margin: [0, 5, 20, 5]},
         {text:word.translate, fontSize: 12, bold:false, color:'#30362F',  margin: [0, 5, 20, 5]}
       ])
     })
-    
+
     const pdfCreate:any = {
       content:[
         {text: 'ENGLISH TRAINING', fontSize: 32, bold: true, color:'#661F33', margin: [0, 0, 0, 20]},
