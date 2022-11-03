@@ -44,18 +44,18 @@ export const wordReducer = createReducer(
     return {...state, loading:false }
   }),
   on(loadWords, (state) => {
-    return {...state, loading:true }
+    return {...state, loading:true, showEditButtons:false, showAddButton:true }
   }),
   on(retrieveWordList, (state, {words}) => {
     return {...state, loading:false, words}
   }),
   on(nextTypeWord, (state) => {
     const new_index = (state.typeWordSearch + 1) % WORD_TYPE_SEARCH.length;
-    return {...state, loading:true, typeWordSearch: new_index }
+    return {...state, typeWordSearch: new_index }
   }),
   on(prevTypeWord, (state) => {
     const new_index = state.typeWordSearch === 0 ?  WORD_TYPE_SEARCH.length - 1 : state.typeWordSearch - 1;
-    return {...state, loading:true, typeWordSearch: new_index}
+    return {...state, typeWordSearch: new_index}
   })
 );
 

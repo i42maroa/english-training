@@ -20,6 +20,7 @@ export const deletedWord = createAction('[Word list] word deleted');
 
 export const loadWords = createAction('[Word list] Load words');
 export const retrieveWordList = createAction('[Word list] retrieve words success', props<{words: ReadonlyArray<Word>}>());
+export const loadWordsError = createAction('[Word list] Load words error', props<{error:any}>());
 
 export const nextTypeWord = createAction('[Change word type] try next word type');
 export const prevTypeWord = createAction('[Change word type] try previous word type');

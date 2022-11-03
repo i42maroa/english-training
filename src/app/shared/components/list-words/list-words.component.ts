@@ -25,7 +25,7 @@ export class ListWordsComponent implements OnInit {
     this.wordList$ = this.store.select(selectWords);
     this.showEditButtons$ = this.store.select(selectShowEditButtons);
     this.wordType$ = this.store.select(selectWordTypeSearch);
-    this.store.dispatch(loadWords());
+    this.store.dispatch(loadWords())
   }
 
   updateWord(word:Word){

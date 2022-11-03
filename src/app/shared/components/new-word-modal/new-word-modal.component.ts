@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { addWord, closeAddModalWord, closeModifyModalWord, modifyWord } from 'src/app/state/actions/words.actions';
-import { selectModalWord, selectWordModalWordId } from 'src/app/state/selectors/words.selectors';
+import { selectModalWord } from 'src/app/state/selectors/words.selectors';
 import { Word, WordType, WORD_TYPE } from '../../models/word.interface';
 
 const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa&text=';
