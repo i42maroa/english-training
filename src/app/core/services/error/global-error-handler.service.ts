@@ -22,7 +22,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
       //Cliente Error
       message = errorService.getClientErrorMessage(error);
     }
-    notificationService.showError('', message);
+    notificationService.showError(message);
     console.log(error);
   }
 }

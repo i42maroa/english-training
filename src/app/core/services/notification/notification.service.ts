@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { NotificationSnackbarComponent } from "../../components/notification-snackbar/notification-snackbar.component";
+import { SnackbarErrorComponent } from "../../components/snackbar/snackbar-error/snackbar-error.component";
+import { SnackbarOkComponent } from "../../components/snackbar/snackbar-ok/snackbar-ok.component";
 
 @Injectable({
     providedIn: 'root',
@@ -8,55 +9,33 @@ import { NotificationSnackbarComponent } from "../../components/notification-sna
 export class NotificationService {
     constructor( private readonly snackBar: MatSnackBar, private readonly zone:NgZone) {}
 
-    showSuccess(title:string, message:string): void {
-        this.snackBar.openFromComponent(NotificationSnackbarComponent, {
+    showSuccess(message:string): void {
+        this.snackBar.openFromComponent(SnackbarOkComponent, {
             duration:3000,
-            data: {
-                title,
-                message,
-                snackType: 'success'
-            }
+            data: { message }
         });
     }
 
-    showSuccessNoTime(title:string, message:string): void {
-        this.snackBar.openFromComponent(NotificationSnackbarComponent, {
-            data: {
-                title,
-                message,
-                snackType: 'success',
-                closeSnackbar: () => {
-                    this.snackBar.dismiss();
-                }
-            }
+    showSuccessNoTime(message:string): void {
+        this.snackBar.openFromComponent(SnackbarOkComponent, {
+          data: { message }
         });
     }
 
-    showError(title:string, message:string): void {
+    showError(message:string): void {
         this.zone.run(() => {
-            this.snackBar.openFromComponent(NotificationSnackbarComponent, {
+            this.snackBar.openFromComponent(SnackbarErrorComponent, {
                 duration:3000,
-                data: {
-                    title,
-                    message,
-                    snackType: 'error'
-                }
+                data: { message }
             });
-        })   
+        })
     }
 
-    showErrorNoTime(title:string, message:string): void {
+    showErrorNoTime(message:string): void {
         this.zone.run(() => {
-            this.snackBar.openFromComponent(NotificationSnackbarComponent, {
-                data: {
-                    title,
-                    message,
-                    snackType: 'error',
-                    closeSnackbar: () => {
-                        this.snackBar.dismiss();
-                    }
-                }
+            this.snackBar.openFromComponent(SnackbarErrorComponent, {
+              data: { message }
             });
-        })   
+        })
     }
 }

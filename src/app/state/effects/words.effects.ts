@@ -30,7 +30,7 @@ export class WordEffects {
 
   loadWordsError$ = createEffect(() => this.actions$.pipe(
     ofType(loadWordsError),
-    tap((error) =>  console.log(error) ))
+    tap((error) =>  this.notificationService.showError("Words not loaded")))
   );
 
   addWord$ = createEffect(() => this.actions$.pipe(
@@ -45,7 +45,7 @@ export class WordEffects {
 
   addWordError$ = createEffect(() => this.actions$.pipe(
     ofType(addWordError),
-    tap((error) => console.log(error) ))
+    tap((error) => this.notificationService.showError("Word not added") ))
   );
 
   updateWord$ = createEffect(() => this.actions$.pipe(
@@ -60,7 +60,7 @@ export class WordEffects {
 
   modifiedWordError$ = createEffect(() => this.actions$.pipe(
     ofType(modifiedWordError),
-    tap((error) => console.log(error) ))
+    tap((error) => this.notificationService.showError("Word not modified") ))
   );
 
   deleteWord$ = createEffect(() => this.actions$.pipe(
@@ -75,25 +75,31 @@ export class WordEffects {
 
   deleteWordError$ = createEffect(() => this.actions$.pipe(
     ofType(deleteWordError),
-    tap((error) => console.log(error) ))
+    tap((error) => this.notificationService.showError("Word not deleted") ))
   );
 
   addedWord$ = createEffect(() => this.actions$.pipe(
     ofType(addedWord),
     map( () => {
-      this.notificationService.showSuccessNoTime("Exito", "exito");
+      this.notificationService.showSuccess("Word added");
       return loadWords()
     }))
   );
 
   modifiedWord$ = createEffect(() => this.actions$.pipe(
     ofType(modifiedWord),
-    map( () => loadWords()))
+    map( () => {
+      this.notificationService.showSuccess("Word modified");
+      return loadWords()
+    }))
   );
 
   deletedWord$ = createEffect(() => this.actions$.pipe(
     ofType(deletedWord),
-    map( () => loadWords()))
+    map( () => {
+      this.notificationService.showSuccess("Word deleted");
+      return loadWords()
+    }))
   );
 
   constructor(

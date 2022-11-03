@@ -29,6 +29,8 @@ import { WordEffects } from './state/effects/words.effects';
 import { TypeWordListSelectorComponent } from './shared/components/type-word-list-selector/type-word-list-selector.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestore, AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { SnackbarErrorComponent } from './core/components/snackbar/snackbar-error/snackbar-error.component';
+import { SnackbarOkComponent } from './core/components/snackbar/snackbar-ok/snackbar-ok.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { AngularFirestore, AngularFirestoreModule } from "@angular/fire/compat/f
     HeaderComponent,
     NotificationSnackbarComponent,
     WordModalComponent,
-    TypeWordListSelectorComponent
+    TypeWordListSelectorComponent,
+    SnackbarErrorComponent,
+    SnackbarOkComponent
   ],
   imports: [
     BrowserAnimationsModule,
