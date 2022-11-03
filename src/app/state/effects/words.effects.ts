@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, of } from 'rxjs';
-import { map, catchError, exhaustMap, mergeMap, concatMap, switchMap, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { map, catchError, exhaustMap, switchMap, tap } from 'rxjs/operators';
 import { WordService } from 'src/app/core/services/word.service';
-import { addedWord, addWord, deletedWord, deleteWord, loadWords, loadWordsError, modifiedWord, modifyWord, nextTypeWord, prevTypeWord, retrieveWordList } from '../actions/words.actions';
+import { addedWord, addWord, addWordError, deletedWord, deleteWord, deleteWordError, loadWords, loadWordsError, modifiedWord, modifiedWordError, modifyWord, nextTypeWord, prevTypeWord, retrieveWordList } from '../actions/words.actions';
 
 @Injectable()
 export class WordEffects {
-
 
   prevTypeWord$ = createEffect(() => this.actions$.pipe(
     ofType(prevTypeWord),
@@ -23,7 +22,7 @@ export class WordEffects {
     ofType(loadWords),
     switchMap(() => this.wordsService.getListWordsByType().pipe(
         map(words => retrieveWordList({words})),
-        catchError((error) => of(loadWordsError({error})))
+        catchError(error => of(loadWordsError({error})))
       ))
     )
   );
@@ -38,9 +37,14 @@ export class WordEffects {
     exhaustMap(resp => this.wordsService.saveWord(resp.word)
       .pipe(
         map(_ => addedWord()),
-        catchError(() => EMPTY)
+        catchError(error => of(addWordError({error})))
       ))
     )
+  );
+
+  addWordError$ = createEffect(() => this.actions$.pipe(
+    ofType(addWordError),
+    tap((error) => console.log(error) ))
   );
 
   updateWord$ = createEffect(() => this.actions$.pipe(
@@ -48,20 +52,29 @@ export class WordEffects {
     exhaustMap(resp => this.wordsService.updateWord(resp.word)
       .pipe(
         map(_ => modifiedWord()),
-        catchError(() => EMPTY)
+        catchError(error => of(modifiedWordError({error})))
       ))
     )
   );
 
+  modifiedWordError$ = createEffect(() => this.actions$.pipe(
+    ofType(modifiedWordError),
+    tap((error) => console.log(error) ))
+  );
 
   deleteWord$ = createEffect(() => this.actions$.pipe(
     ofType(deleteWord),
     exhaustMap(resp => this.wordsService.deleteWord(resp.idWord)
       .pipe(
         map(_ => deletedWord()),
-        catchError(() => EMPTY)
+        catchError(error => of(deleteWordError({error})))
       ))
     )
+  );
+
+  deleteWordError$ = createEffect(() => this.actions$.pipe(
+    ofType(deleteWordError),
+    tap((error) => console.log(error) ))
   );
 
   addedWord$ = createEffect(() => this.actions$.pipe(
