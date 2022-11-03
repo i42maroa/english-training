@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { map, catchError, exhaustMap, switchMap, tap } from 'rxjs/operators';
+import { map, catchError, exhaustMap, switchMap, tap, mergeMap } from 'rxjs/operators';
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { WordService } from 'src/app/core/services/word.service';
-import { addedWord, addWord, addWordError, deletedWord, deleteWord, deleteWordError, loadWords, loadWordsError, modifiedWord, modifiedWordError, modifyWord, nextTypeWord, prevTypeWord, retrieveWordList } from '../actions/words.actions';
+import { Word } from 'src/app/shared/models/word.interface';
+import { addedWord, addWord, addWordError, deletedWord, deleteWord, deleteWordError, exportedPDF, exportPDF, exportPDFError, loadWords, loadWordsError, modifiedWord, modifiedWordError, modifyWord, nextTypeWord, prevTypeWord, retrieveWordList } from '../actions/words.actions';
 
 @Injectable()
 export class WordEffects {
@@ -101,6 +102,24 @@ export class WordEffects {
       return loadWords()
     }))
   );
+
+  exportPDF$ = createEffect(() => this.actions$.pipe(
+    ofType(exportPDF),
+    mergeMap(data => this.wordsService.exportPdf(data.words as Word[])
+      .pipe(
+        map(() =>{
+          this.notificationService.showSuccess('', 'List words exported to PDF');
+          return exportedPDF()}),
+        catchError(() => of(exportPDFError()))
+      ))
+    )
+  );
+
+  exportPDFError$ = createEffect(() => this.actions$.pipe(
+    ofType(exportPDFError),
+    tap( () => this.notificationService.showError('', 'Can not export to PDF')))
+  );
+
 
   constructor(
     private actions$: Actions,

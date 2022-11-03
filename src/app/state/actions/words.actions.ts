@@ -27,3 +27,7 @@ export const loadWordsError = createAction('[Word list] Load words error', props
 
 export const nextTypeWord = createAction('[Change word type] try next word type');
 export const prevTypeWord = createAction('[Change word type] try previous word type');
+
+export const exportPDF = createAction('[Export PDF] try export list to PDF', props<{words: ReadonlyArray<Word>}>());
+export const exportedPDF = createAction('[Export PDF] export list to PDF sucsessful');
+export const exportPDFError = createAction('[Export PDF] error to export PDF');

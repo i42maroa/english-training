@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { Word, WordType, WordTypeSearch } from 'src/app/shared/models/word.interface';
 import { FirestoreService } from './firestore/firestore.service';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import { Store } from '@ngrx/store';
+import { exportedPDF, exportPDFError } from 'src/app/state/actions/words.actions';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable({
@@ -13,7 +15,8 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 export class WordService {
 
   constructor(
-    private readonly firestore:FirestoreService
+    private readonly firestore:FirestoreService,
+    private readonly store: Store
   ) { }
 
   wordList:Word[] = [];
@@ -34,8 +37,8 @@ export class WordService {
     return from(this.firestore.deleteWord(word));
   }
 
-  exportPdf(wordList:Word[]){
-
+  exportPdf(wordList:Word[]): Observable<boolean>{
+    console.log("start")
     //[izq,arriba, der, abajo]
     const tableBody = [[
       {text:'WORD', fontSize: 16, bold: true, color:'#661F33',  margin: [0, 5, 20, 5]},
@@ -64,6 +67,14 @@ export class WordService {
     }
 
     const pdf = pdfMake.createPdf(pdfCreate);
-    pdf.download()
+
+    try {
+      console.log("try download")
+      pdf.download();
+      console.log("download")
+      return of(true);
+    } catch (error) {
+      throw new TypeError('Can not be export PDF' + error)
+    }
   }
 }

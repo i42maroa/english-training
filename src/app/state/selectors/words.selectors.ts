@@ -44,7 +44,6 @@ export const selectWordTypeSearch = createSelector(
     (state:WordState) => state.typeWordSearch
 )
 
-
 export const selectWordTypeSearchName = createSelector(
   selectWordsFeature,
   (state:WordState) => WORD_TYPE_SEARCH[state.typeWordSearch].label
