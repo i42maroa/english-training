@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, exhaustMap, switchMap, tap } from 'rxjs/operators';
+import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { WordService } from 'src/app/core/services/word.service';
 import { addedWord, addWord, addWordError, deletedWord, deleteWord, deleteWordError, loadWords, loadWordsError, modifiedWord, modifiedWordError, modifyWord, nextTypeWord, prevTypeWord, retrieveWordList } from '../actions/words.actions';
 
@@ -79,7 +80,10 @@ export class WordEffects {
 
   addedWord$ = createEffect(() => this.actions$.pipe(
     ofType(addedWord),
-    map( () => loadWords()))
+    map( () => {
+      this.notificationService.showSuccessNoTime("Exito", "exito");
+      return loadWords()
+    }))
   );
 
   modifiedWord$ = createEffect(() => this.actions$.pipe(
@@ -94,6 +98,7 @@ export class WordEffects {
 
   constructor(
     private actions$: Actions,
-    private wordsService: WordService
+    private wordsService: WordService,
+    private notificationService: NotificationService
   ) {}
 }
