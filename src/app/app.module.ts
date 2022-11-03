@@ -31,6 +31,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestore, AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { SnackbarErrorComponent } from './core/components/snackbar/snackbar-error/snackbar-error.component';
 import { SnackbarOkComponent } from './core/components/snackbar/snackbar-ok/snackbar-ok.component';
+import { SpinnerComponent } from './core/components/spinner/spinner.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { SnackbarOkComponent } from './core/components/snackbar/snackbar-ok/snac
     WordModalComponent,
     TypeWordListSelectorComponent,
     SnackbarErrorComponent,
-    SnackbarOkComponent
+    SnackbarOkComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserAnimationsModule,
