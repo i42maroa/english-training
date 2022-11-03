@@ -9,32 +9,32 @@ import { SnackbarOkComponent } from "../../components/snackbar/snackbar-ok/snack
 export class NotificationService {
     constructor( private readonly snackBar: MatSnackBar, private readonly zone:NgZone) {}
 
-    showSuccess(message:string): void {
+    showSuccess(word:string, message:string, ): void {
         this.snackBar.openFromComponent(SnackbarOkComponent, {
             duration:3000,
-            data: { message }
+            data: { message, word }
         });
     }
 
-    showSuccessNoTime(message:string): void {
+    showSuccessNoTime(word:string, message:string): void {
         this.snackBar.openFromComponent(SnackbarOkComponent, {
-          data: { message }
+          data: { message, word }
         });
     }
 
-    showError(message:string): void {
+    showError(word:string, message:string): void {
         this.zone.run(() => {
             this.snackBar.openFromComponent(SnackbarErrorComponent, {
                 duration:3000,
-                data: { message }
+                data: { message, word }
             });
         })
     }
 
-    showErrorNoTime(message:string): void {
+    showErrorNoTime(word:string, message:string): void {
         this.zone.run(() => {
             this.snackBar.openFromComponent(SnackbarErrorComponent, {
-              data: { message }
+              data: { message, word }
             });
         })
     }

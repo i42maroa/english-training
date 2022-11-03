@@ -32,8 +32,8 @@ export class ListWordsComponent implements OnInit {
     this.store.dispatch(modalModifyWord({word}));
   }
 
-  deleteWord(idWord:string){
-    this.store.dispatch(deleteWord({idWord}))
+  deleteWord(word:Word){
+    this.store.dispatch(deleteWord({word}))
   }
 
   // showDeleteModal(){

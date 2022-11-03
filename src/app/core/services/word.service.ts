@@ -30,8 +30,8 @@ export class WordService {
     return from(this.firestore.getWordByType()) as Observable<Word[]>;
   }
 
-  deleteWord(id:string){
-    return from(this.firestore.deleteWord(id));
+  deleteWord(word:Word){
+    return from(this.firestore.deleteWord(word));
   }
 
   exportPdf(wordList:Word[]){

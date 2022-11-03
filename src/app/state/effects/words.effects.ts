@@ -30,74 +30,74 @@ export class WordEffects {
 
   loadWordsError$ = createEffect(() => this.actions$.pipe(
     ofType(loadWordsError),
-    tap((error) =>  this.notificationService.showError("Words not loaded")))
+    tap((error) =>  this.notificationService.showError('', "Words can not be loaded")))
   );
 
   addWord$ = createEffect(() => this.actions$.pipe(
     ofType(addWord),
     exhaustMap(resp => this.wordsService.saveWord(resp.word)
       .pipe(
-        map(_ => addedWord()),
-        catchError(error => of(addWordError({error})))
+        map( _ => addedWord({word:resp.word})),
+        catchError(error => of(addWordError({error, word:resp.word})))
       ))
     )
   );
 
   addWordError$ = createEffect(() => this.actions$.pipe(
     ofType(addWordError),
-    tap((error) => this.notificationService.showError("Word not added") ))
+    tap(({error, word}) => this.notificationService.showError(word.name, ` can not be added`) ))
   );
 
   updateWord$ = createEffect(() => this.actions$.pipe(
     ofType(modifyWord),
     exhaustMap(resp => this.wordsService.updateWord(resp.word)
       .pipe(
-        map(_ => modifiedWord()),
-        catchError(error => of(modifiedWordError({error})))
+        map(_ => modifiedWord({word:resp.word})),
+        catchError(error => of(modifiedWordError({error, word:resp.word})))
       ))
     )
   );
 
   modifiedWordError$ = createEffect(() => this.actions$.pipe(
     ofType(modifiedWordError),
-    tap((error) => this.notificationService.showError("Word not modified") ))
+    tap(({error, word}) => this.notificationService.showError(word.name, ` can not be modified`) ))
   );
 
   deleteWord$ = createEffect(() => this.actions$.pipe(
     ofType(deleteWord),
-    exhaustMap(resp => this.wordsService.deleteWord(resp.idWord)
+    exhaustMap(resp => this.wordsService.deleteWord(resp.word)
       .pipe(
-        map(_ => deletedWord()),
-        catchError(error => of(deleteWordError({error})))
+        map(_ => deletedWord({word:resp.word})),
+        catchError(error => of(deleteWordError({error, word:resp.word})))
       ))
     )
   );
 
   deleteWordError$ = createEffect(() => this.actions$.pipe(
     ofType(deleteWordError),
-    tap((error) => this.notificationService.showError("Word not deleted") ))
+    tap(({error, word}) => this.notificationService.showError(word.name,` can not be deleted`) ))
   );
 
   addedWord$ = createEffect(() => this.actions$.pipe(
     ofType(addedWord),
-    map( () => {
-      this.notificationService.showSuccess("Word added");
+    map( data => {
+      this.notificationService.showSuccess(data.word.name, ` added`);
       return loadWords()
     }))
   );
 
   modifiedWord$ = createEffect(() => this.actions$.pipe(
     ofType(modifiedWord),
-    map( () => {
-      this.notificationService.showSuccess("Word modified");
+    map( data => {
+      this.notificationService.showSuccess(data.word.name,` modified`);
       return loadWords()
     }))
   );
 
   deletedWord$ = createEffect(() => this.actions$.pipe(
     ofType(deletedWord),
-    map( () => {
-      this.notificationService.showSuccess("Word deleted");
+    map( data => {
+      this.notificationService.showSuccess(data.word.name, ` deleted`);
       return loadWords()
     }))
   );

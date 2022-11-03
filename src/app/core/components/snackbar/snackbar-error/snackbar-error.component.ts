@@ -12,5 +12,4 @@ export class SnackbarErrorComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
