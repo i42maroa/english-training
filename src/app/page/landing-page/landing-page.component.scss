@@ -41,6 +41,18 @@
     fill: var(--secondary-color);
     margin: 0 auto;
     cursor: pointer;
+    border: none;
+    background: transparent;
+    display: flex;
+}
+
+.export_button:hover{
+  transform:scale(1.1);
+}
+
+.export_button:disabled{
+    fill: var(--disabled-color);
+    cursor: not-allowed;
 }
 
 @media (max-width: 500px) {
