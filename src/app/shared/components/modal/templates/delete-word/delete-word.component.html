@@ -1,0 +1,4 @@
+<div class="container">
+  <h3 class="message">Are you sure to delete the word <strong> {{ (word$ | async)!.name }}</strong>?</h3>
+  <button (click)="deleteWord()">Delete</button>
+</div>

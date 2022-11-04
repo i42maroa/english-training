@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { Word } from 'src/app/shared/models/word.interface';
+import { from, Observable, of } from 'rxjs';
+import { Word, WordType, WordTypeSearch } from 'src/app/shared/models/word.interface';
 import { FirestoreService } from './firestore/firestore.service';
 
 import * as pdfMake from 'pdfmake/build/pdfmake.js';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
+import { Store } from '@ngrx/store';
+import { exportedPDF, exportPDFError } from 'src/app/state/actions/words.actions';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable({
@@ -12,10 +14,9 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts.js';
 })
 export class WordService {
 
-  readonly wordUrl = "word"
-
   constructor(
-    private readonly firestore:FirestoreService
+    private readonly firestore:FirestoreService,
+    private readonly store: Store
   ) { }
 
   wordList:Word[] = [];
@@ -28,29 +29,29 @@ export class WordService {
     return from(this.firestore.updateWord(newWord));
   }
 
-  getListWords(): Observable<Word[]>{
-    return from(this.firestore.getWord()) as Observable<Word[]>;
+  getListWordsByType(): Observable<Word[]>{
+    return from(this.firestore.getWordByType()) as Observable<Word[]>;
   }
 
-  deleteWord(id:string){
-    return from(this.firestore.deleteWord(id));
+  deleteWord(word:Word){
+    return from(this.firestore.deleteWord(word));
   }
 
-  exportPdf(wordList:Word[]){
-
+  exportPdf(wordList:Word[]): Observable<boolean>{
+    console.log("start")
     //[izq,arriba, der, abajo]
     const tableBody = [[
-      {text:'WORD', fontSize: 16, bold: true, color:'#661F33',  margin: [0, 5, 20, 5]}, 
+      {text:'WORD', fontSize: 16, bold: true, color:'#661F33',  margin: [0, 5, 20, 5]},
       {text:'TRANSLATION', fontSize: 16, bold: true, color:'#661F33', margin: [0, 5, 20, 5]}
     ]]
 
     wordList.forEach(word =>{
       tableBody.push([
-        {text:word.name, fontSize: 12, bold:false, color:'#30362F', margin: [0, 5, 20, 5]}, 
+        {text:word.name, fontSize: 12, bold:false, color:'#30362F', margin: [0, 5, 20, 5]},
         {text:word.translate, fontSize: 12, bold:false, color:'#30362F',  margin: [0, 5, 20, 5]}
       ])
     })
-    
+
     const pdfCreate:any = {
       content:[
         {text: 'ENGLISH TRAINING', fontSize: 32, bold: true, color:'#661F33', margin: [0, 0, 0, 20]},
@@ -66,6 +67,14 @@ export class WordService {
     }
 
     const pdf = pdfMake.createPdf(pdfCreate);
-    pdf.download()
+
+    try {
+      console.log("try download")
+      pdf.download();
+      console.log("download")
+      return of(true);
+    } catch (error) {
+      throw new TypeError('Can not be export PDF' + error)
+    }
   }
 }

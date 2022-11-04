@@ -1,38 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Word } from 'src/app/shared/models/word.interface';
-import { Firestore, collectionData, collection, addDoc, deleteDoc, orderBy, doc, } from '@angular/fire/firestore';
-import { limit, query, updateDoc } from 'firebase/firestore';
+import { Word, WORD_TYPE_SEARCH } from 'src/app/shared/models/word.interface';
+import { Store } from '@ngrx/store';
+import { BehaviorSubject } from 'rxjs';
+import { selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
 
-  constructor( 
-    private readonly firestore:Firestore ) { }
+  wordType$:BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
+  // save last document in snapshot of items received
+  lastInResponse: any = [];
+
+  constructor(
+    private readonly store:Store,
+    private db: AngularFirestore
+  ) {
+    this.store.select(selectWordTypeSearch).subscribe(type => this.wordType$.next(type));
+  }
 
     addWord(word:Word){
-      const place = collection(this.firestore, 'word');
-      return addDoc(place, word) 
+      return this.db.collection('word').add(word);
     }
 
-    getWord(){
-      const place = collection(this.firestore, 'word', );
-      // const q = query(place, orderBy("name"), limit(3));
-      //const q = query(citiesRef, where("population", ">", 100000), orderBy("population"), limit(2));
-      const q = query(place, orderBy("name", "asc"));
-      return collectionData(q, {idField:'id'} )
+    getWordByType(){
+      const type = this.wordType$.getValue();
+      return type === 0 ?
+        this.db.collection('word', ref => ref.orderBy("name", "asc")).valueChanges({idField:'id'}):
+        this.db.collection('word', ref => ref.where('wordType', '==', WORD_TYPE_SEARCH[type].value)).valueChanges({idField:'id'});
     }
 
-    deleteWord(id:string){
-      const place = doc(this.firestore, `word/${id}`);
-      return deleteDoc(place);  
+    deleteWord(word:Word){
+      return this.db.collection(`word`).doc(word.id!).delete();
     }
 
     updateWord(word:Word){
-      const place = doc(this.firestore, `word/${word.id!}`);
-      return updateDoc(place, {...word})
+      return this.db.collection(`word`).doc(word.id!).update({...word});
     }
+
 }

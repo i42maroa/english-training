@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { WordService } from 'src/app/core/services/word.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Word } from 'src/app/shared/models/word.interface';
+import { exportPDF } from 'src/app/state/actions/words.actions';
 import { selectShowModalWord, selectWords } from 'src/app/state/selectors/words.selectors';
 
 @Component({
@@ -14,18 +14,23 @@ export class LandingPageComponent implements OnInit {
 
   showModal$:Observable<boolean> = new Observable<boolean>();
   wordList$:Observable<ReadonlyArray<Word>> = new Observable<ReadonlyArray<Word>>();
+  wordsArrayList$:BehaviorSubject<ReadonlyArray<Word>> = new BehaviorSubject<ReadonlyArray<Word>>([]);
+  exportButtonDisabled:boolean = false;
 
   constructor(
-    private readonly store:Store,
-    private readonly word:WordService
+    private readonly store:Store
   ) { }
 
   ngOnInit(): void {
     this.showModal$ = this.store.select(selectShowModalWord);
     this.wordList$= this.store.select(selectWords);
+    this.wordList$.subscribe(words => {
+      this.wordsArrayList$.next(words);
+      this.exportButtonDisabled = words.length === 0;
+    });
   }
 
   export(){
-    this.wordList$.subscribe(words => this.word.exportPdf(words as Word[]))
+    this.store.dispatch(exportPDF({words:this.wordsArrayList$.getValue()}));
   }
 }

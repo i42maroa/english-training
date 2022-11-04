@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WordModalComponent } from './word-modal.component';
+import { SnackbarOkComponent } from './snackbar-ok.component';
 
-describe('WordModalComponent', () => {
-  let component: WordModalComponent;
-  let fixture: ComponentFixture<WordModalComponent>;
+describe('SnackbarOkComponent', () => {
+  let component: SnackbarOkComponent;
+  let fixture: ComponentFixture<SnackbarOkComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WordModalComponent ]
+      declarations: [ SnackbarOkComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WordModalComponent);
+    fixture = TestBed.createComponent(SnackbarOkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

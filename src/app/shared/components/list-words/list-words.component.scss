@@ -43,7 +43,7 @@ hr{
     justify-items: center;
     // flex-direction: row;
      margin: 0.5rem 0;
-    
+
 }
 
 .line p{
@@ -61,6 +61,11 @@ hr{
     height: 1.5rem;
     cursor: pointer;
     fill: var(--secondary-color);
+}
+
+.icon:hover{
+  transform:scale(1.1);
+  transition: 0.2s;
 }
 
 .edit_container{

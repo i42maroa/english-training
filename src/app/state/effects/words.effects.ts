@@ -1,55 +1,129 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
-import { map, catchError, exhaustMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { map, catchError, exhaustMap, switchMap, tap, mergeMap } from 'rxjs/operators';
+import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { WordService } from 'src/app/core/services/word.service';
-import { addedWord, addWord, deletedWord, deleteWord, loadWords, modifiedWord, modifyWord, retrieveWordList } from '../actions/words.actions';
- 
+import { Word } from 'src/app/shared/models/word.interface';
+import { addedWord, addWord, addWordError, deletedWord, deleteWord, deleteWordError, exportedPDF, exportPDF, exportPDFError, loadWords, loadWordsError, modifiedWord, modifiedWordError, modifyWord, nextTypeWord, prevTypeWord, retrieveWordList } from '../actions/words.actions';
+
 @Injectable()
 export class WordEffects {
- 
+
+  prevTypeWord$ = createEffect(() => this.actions$.pipe(
+    ofType(prevTypeWord),
+    map( () => loadWords()))
+  );
+
+  nextTypeWord$ = createEffect(() => this.actions$.pipe(
+    ofType(nextTypeWord),
+    map(() => loadWords()))
+  );
+
   loadWords$ = createEffect(() => this.actions$.pipe(
     ofType(loadWords),
-    exhaustMap(() => this.wordsService.getListWords()
-      .pipe(
-        map(words => (retrieveWordList({words}))),
-        catchError(() => EMPTY)
+    switchMap(() => this.wordsService.getListWordsByType().pipe(
+        map(words => retrieveWordList({words})),
+        catchError(error => of(loadWordsError({error})))
       ))
     )
+  );
+
+  loadWordsError$ = createEffect(() => this.actions$.pipe(
+    ofType(loadWordsError),
+    tap((error) =>  this.notificationService.showError('', "Words can not be loaded")))
   );
 
   addWord$ = createEffect(() => this.actions$.pipe(
     ofType(addWord),
     exhaustMap(resp => this.wordsService.saveWord(resp.word)
       .pipe(
-        map(_ => addedWord()),
-        catchError(() => EMPTY)
+        map( _ => addedWord({word:resp.word})),
+        catchError(error => of(addWordError({error, word:resp.word})))
       ))
     )
+  );
+
+  addWordError$ = createEffect(() => this.actions$.pipe(
+    ofType(addWordError),
+    tap(({error, word}) => this.notificationService.showError(word.name, ` can not be added`) ))
   );
 
   updateWord$ = createEffect(() => this.actions$.pipe(
     ofType(modifyWord),
     exhaustMap(resp => this.wordsService.updateWord(resp.word)
       .pipe(
-        map(_ => modifiedWord()),
-        catchError(() => EMPTY)
+        map(_ => modifiedWord({word:resp.word})),
+        catchError(error => of(modifiedWordError({error, word:resp.word})))
       ))
     )
   );
 
+  modifiedWordError$ = createEffect(() => this.actions$.pipe(
+    ofType(modifiedWordError),
+    tap(({error, word}) => this.notificationService.showError(word.name, ` can not be modified`) ))
+  );
+
   deleteWord$ = createEffect(() => this.actions$.pipe(
     ofType(deleteWord),
-    exhaustMap(resp => this.wordsService.deleteWord(resp.idWord)
+    exhaustMap(resp => this.wordsService.deleteWord(resp.word)
       .pipe(
-        map(_ => deletedWord()),
-        catchError(() => EMPTY)
+        map(_ => deletedWord({word:resp.word})),
+        catchError(error => of(deleteWordError({error, word:resp.word})))
       ))
     )
   );
- 
+
+  deleteWordError$ = createEffect(() => this.actions$.pipe(
+    ofType(deleteWordError),
+    tap(({error, word}) => this.notificationService.showError(word.name,` can not be deleted`) ))
+  );
+
+  addedWord$ = createEffect(() => this.actions$.pipe(
+    ofType(addedWord),
+    map( data => {
+      this.notificationService.showSuccess(data.word.name, ` added`);
+      return loadWords()
+    }))
+  );
+
+  modifiedWord$ = createEffect(() => this.actions$.pipe(
+    ofType(modifiedWord),
+    map( data => {
+      this.notificationService.showSuccess(data.word.name,` modified`);
+      return loadWords()
+    }))
+  );
+
+  deletedWord$ = createEffect(() => this.actions$.pipe(
+    ofType(deletedWord),
+    map( data => {
+      this.notificationService.showSuccess(data.word.name, ` deleted`);
+      return loadWords()
+    }))
+  );
+
+  exportPDF$ = createEffect(() => this.actions$.pipe(
+    ofType(exportPDF),
+    mergeMap(data => this.wordsService.exportPdf(data.words as Word[])
+      .pipe(
+        map(() =>{
+          this.notificationService.showSuccess('', 'List words exported to PDF');
+          return exportedPDF()}),
+        catchError(() => of(exportPDFError()))
+      ))
+    )
+  );
+
+  exportPDFError$ = createEffect(() => this.actions$.pipe(
+    ofType(exportPDFError),
+    tap( () => this.notificationService.showError('', 'Can not export to PDF')))
+  );
+
+
   constructor(
     private actions$: Actions,
-    private wordsService: WordService
+    private wordsService: WordService,
+    private notificationService: NotificationService
   ) {}
 }

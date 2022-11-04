@@ -1,0 +1,29 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem auto;
+    width: 80%;
+}
+
+.text{
+    display: flex;
+    margin: auto;
+    width: fit-content;
+}
+
+h3{
+    display: inline-block;
+    width: fit-content;
+    margin: auto;
+    color:var(--secondary-color);
+}
+
+.arrow_button{
+    cursor: pointer;
+    fill:var(--secondary-color);
+}
+
+.arrow_button:hover{
+  transform:scale(1.2);
+  transition: 0.2s;
+}

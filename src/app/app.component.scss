@@ -1,5 +1,3 @@
-
-
 .main_container{
     min-height: 100vh;
     max-width: 500px;
@@ -14,8 +12,8 @@
 .background{
     background: linear-gradient(to top left, var(--background-color-one), var(--background-color-two));
     width: 100%;
-    height: fit-content;
+    height: 100%;
     padding: 0;
     margin: 0;
-    
+
 }
