@@ -24,8 +24,7 @@ export class NewWordComponent implements OnInit {
 
   isMod:boolean = false;
   idPrecharge?:string = "";
-
-  modalTitle = 'modify'
+  modalTitle:string = '';
 
   optionSelect: {label:string; value:WordType}[] = WORD_TYPE;
 
@@ -50,7 +49,7 @@ export class NewWordComponent implements OnInit {
 
     this.store.select(selectModalWord).subscribe( modalStatus => {
 
-      // this.modalTitle = modalStatus.type === 'new'? "Add new word" : "Modify word";
+      this.modalTitle = modalStatus.type === 'new'? "Add new word" : "Modify word";
       this.isMod = modalStatus.type === 'new'? false:true;
 
       if(modalStatus.wordPrecharged){
