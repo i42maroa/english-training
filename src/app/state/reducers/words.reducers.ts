@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { WORD_TYPE, WORD_TYPE_SEARCH } from 'src/app/shared/models/word.interface';
 import { PREDIFINED_WORD_STATE, WordState } from 'src/app/shared/models/word.state';
-import { addedWord, modalAddWord,  loadWords, modalModifyWord, retrieveWordList, addWord, modifyWord, modifiedWord, deleteWord, deletedWord, showEditButtons, closeEditButtons, closeAddModalWord, closeModifyModalWord, nextTypeWord, prevTypeWord, exportPDF, exportedPDF, exportPDFError } from '../actions/words.actions';
+import { addedWord, modalAddWord,  loadWords, modalModifyWord, retrieveWordList, addWord, modifyWord, modifiedWord, deleteWord, deletedWord, showEditButtons, closeEditButtons, nextTypeWord, prevTypeWord, exportPDF, exportedPDF, exportPDFError, closeModal, modalDeleteWord } from '../actions/words.actions';
 
 export const initialState:WordState = PREDIFINED_WORD_STATE;
 
@@ -10,14 +10,14 @@ export const wordReducer = createReducer(
   on(modalAddWord, (state) => {
     return {...state, showAddButton:false, modalWord:{show:true,type:'new'} }
   }),
-  on(closeAddModalWord, (state) => {
-    return {...state, showAddButton:true, modalWord:{show:false,type:'new'} }
+  on(modalDeleteWord, (state, {word}) => {
+    return {...state, showAddButton:false, modalWord:{show:true,type:'delete', wordPrecharged:word} }
+  }),
+  on(closeModal, (state) => {
+    return {...state, showAddButton:true, modalWord:{show:false, type:'new'} }
   }),
   on(modalModifyWord, (state, {word}) => {
     return {...state, showAddButton:false, modalWord:{show:true,type:'modify', wordPrecharged:word} }
-  }),
-  on(closeModifyModalWord, (state) => {
-    return {...state, modalWord:{show:false,type:'modify'} }
   }),
   on(showEditButtons, (state) => {
     return {...state, showEditButtons:true, showAddButton:false }
@@ -38,7 +38,7 @@ export const wordReducer = createReducer(
     return {...state, loading:false, modalWord:{show:false,type:'new'} }
   }),
   on(deleteWord, (state) => {
-    return {...state, loading:true }
+    return {...state, loading:true, modalWord:{show:false,type:'new'} }
   }),
   on(deletedWord, (state) => {
     return {...state, loading:false }

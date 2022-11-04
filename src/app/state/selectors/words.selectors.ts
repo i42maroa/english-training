@@ -34,6 +34,11 @@ export const selectShowModalWord = createSelector(
     (state:WordState) => state.modalWord.show
 )
 
+export const selectWordModalWord = createSelector(
+  selectWordsFeature,
+  (state:WordState) => state.modalWord.wordPrecharged!
+)
+
 export const selectWordModalWordId = createSelector(
     selectWordsFeature,
     (state:WordState) => state.modalWord.wordPrecharged!.id!

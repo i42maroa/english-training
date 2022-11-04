@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { closeEditButtons, deleteWord, loadWords, modalModifyWord, showEditButtons } from 'src/app/state/actions/words.actions';
+import {  Observable } from 'rxjs';
+import { closeEditButtons,  loadWords, modalDeleteWord, modalModifyWord, showEditButtons } from 'src/app/state/actions/words.actions';
 import { selectWords, selectShowEditButtons, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
-import { Word, WordTypeSearch } from '../../models/word.interface';
+import { Word } from '../../models/word.interface';
 
 @Component({
   selector: 'app-list-words',
@@ -33,12 +33,8 @@ export class ListWordsComponent implements OnInit {
   }
 
   deleteWord(word:Word){
-    this.store.dispatch(deleteWord({word}))
+    this.store.dispatch(modalDeleteWord({word}))
   }
-
-  // showDeleteModal(){
-  //   this.isDeleteModalShow = true;
-  // }
 
   showEditButtons(){
     this.store.dispatch(showEditButtons());

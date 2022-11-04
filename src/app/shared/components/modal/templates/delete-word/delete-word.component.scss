@@ -1,0 +1,41 @@
+
+
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_header{
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.modal_header h3{
+  color: var(--secondary-color);
+}
+
+.message{
+  text-align: center;
+  padding: 1.5rem 0.5rem 1rem 0.5rem;
+}
+strong{
+  color: var(--secondary-color);
+}
+
+.button_container{
+    display: flex;
+    width: 100%;
+}
+
+button{
+  width: fit-content;
+  height: fit-content;
+  margin: 1rem auto 0 auto;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  cursor:pointer;
+  background: linear-gradient(to bottom right,var(--main-color),var(--secondary-color));
+  color: #fff;
+}

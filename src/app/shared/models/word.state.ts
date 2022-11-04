@@ -2,7 +2,7 @@ import { Word, WordTypeSearch, WORD_TYPE_SEARCH } from "./word.interface";
 
 export interface ModalState{
     show:boolean,
-    type: 'modify' | 'new',
+    type: 'modify' | 'new' | 'delete',
     wordPrecharged?:Word
 }
 

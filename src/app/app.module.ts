@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './page/landing-page/landing-page.component';
-import { NewWordModalComponent } from './shared/components/new-word-modal/new-word-modal.component';
 import { ListWordsComponent } from './shared/components/list-words/list-words.component';
 import { AddButtonComponent } from './shared/components/add-button/add-button.component';
 import { HeaderComponent } from './core/components/header/header.component';
@@ -20,7 +19,6 @@ import { environment } from 'src/environments/environment';
 import { NotificationSnackbarComponent } from './core/components/notification-snackbar/notification-snackbar.component';
 import { GlobalErrorHandlerService } from './core/services/error/global-error-handler.service';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
-import { WordModalComponent } from './core/components/word-modal/word-modal.component';
 import { StoreModule } from '@ngrx/store';
 import { ROOT_REDUCERS } from './state/app.state';
 import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -32,22 +30,26 @@ import { AngularFirestore, AngularFirestoreModule } from "@angular/fire/compat/f
 import { SnackbarErrorComponent } from './core/components/snackbar/snackbar-error/snackbar-error.component';
 import { SnackbarOkComponent } from './core/components/snackbar/snackbar-ok/snackbar-ok.component';
 import { SpinnerComponent } from './core/components/spinner/spinner.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
+import { DeleteWordComponent } from './shared/components/modal/templates/delete-word/delete-word.component';
+import { NewWordComponent } from './shared/components/modal/templates/new-word/new-word.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
-    NewWordModalComponent,
     ListWordsComponent,
     AddButtonComponent,
     HeaderComponent,
     NotificationSnackbarComponent,
-    WordModalComponent,
     TypeWordListSelectorComponent,
     SnackbarErrorComponent,
     SnackbarOkComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ModalComponent,
+    DeleteWordComponent,
+    NewWordComponent
   ],
   imports: [
     BrowserAnimationsModule,

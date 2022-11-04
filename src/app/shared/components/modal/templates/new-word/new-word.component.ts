@@ -1,31 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Word, WordType, WORD_TYPE, WORD_TYPE_SEARCH } from 'src/app/shared/models/word.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { addWord, closeAddModalWord, closeModifyModalWord, modifyWord } from 'src/app/state/actions/words.actions';
+import { Store } from '@ngrx/store';
 import { selectModalWord, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
-import { Word, WordType, WORD_TYPE, WORD_TYPE_SEARCH } from '../../models/word.interface';
+import { addWord,  modifyWord } from 'src/app/state/actions/words.actions';
 
 const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa&text=';
 
 @Component({
-  selector: 'app-new-word-modal',
-  templateUrl: './new-word-modal.component.html',
-  styleUrls: ['./new-word-modal.component.scss']
+  selector: 'app-new-word',
+  templateUrl: './new-word.component.html',
+  styleUrls: ['./new-word.component.scss']
 })
-export class NewWordModalComponent implements OnInit {
+export class NewWordComponent implements OnInit {
 
-  wordType$:BehaviorSubject<number> = new BehaviorSubject<number>(0);
-
-  form!:FormGroup
+  form!:FormGroup;
   searchText:string = REVERSO_URL;
   sendButton:boolean = true;
   translateButton:boolean = true;
-  modalTitle:string = "";
   wordPreloaded:Observable<Word> = new Observable<Word>();
+  wordType$:BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   isMod:boolean = false;
   idPrecharge?:string = "";
+
+  modalTitle = 'modify'
 
   optionSelect: {label:string; value:WordType}[] = WORD_TYPE;
 
@@ -50,7 +50,7 @@ export class NewWordModalComponent implements OnInit {
 
     this.store.select(selectModalWord).subscribe( modalStatus => {
 
-      this.modalTitle = modalStatus.type === 'new'? "Add new word" : "Modify word";
+      // this.modalTitle = modalStatus.type === 'new'? "Add new word" : "Modify word";
       this.isMod = modalStatus.type === 'new'? false:true;
 
       if(modalStatus.wordPrecharged){
@@ -80,14 +80,11 @@ export class NewWordModalComponent implements OnInit {
       this.store.dispatch(addWord({word:newWord}))
   }
 
-  closeModal(){
-    this.isMod ?
-      this.store.dispatch(closeModifyModalWord()):
-      this.store.dispatch(closeAddModalWord());
-  }
+
 
   get getWordTypeDefault():string{
     const wordTypeNumber = this.wordType$.getValue()
     return wordTypeNumber === 0 ?  WORD_TYPE_SEARCH[1].value : WORD_TYPE_SEARCH[wordTypeNumber].value;
   }
+
 }

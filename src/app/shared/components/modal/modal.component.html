@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="blur"></div>
+ <div class="modal_container">
+      <div class="modal_close">
+          <div class="close_item" (click)="closeModal()">X</div>
+      </div>
+      <app-new-word *ngIf="(modalType$ | async).type === 'new'"></app-new-word>
+      <app-new-word *ngIf="(modalType$ | async).type === 'modify'"></app-new-word>
+      <app-delete-word *ngIf="(modalType$ | async).type === 'delete'"></app-delete-word>
+  </div>
+</div>

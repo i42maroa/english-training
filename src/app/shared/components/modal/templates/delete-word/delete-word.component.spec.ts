@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WordModalComponent } from './word-modal.component';
+import { DeleteWordComponent } from './delete-word.component';
 
-describe('WordModalComponent', () => {
-  let component: WordModalComponent;
-  let fixture: ComponentFixture<WordModalComponent>;
+describe('DeleteWordComponent', () => {
+  let component: DeleteWordComponent;
+  let fixture: ComponentFixture<DeleteWordComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WordModalComponent ]
+      declarations: [ DeleteWordComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WordModalComponent);
+    fixture = TestBed.createComponent(DeleteWordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
