@@ -50,9 +50,14 @@
   transform:scale(1.1);
 }
 
+
 .export_button:disabled{
     fill: var(--disabled-color);
     cursor: not-allowed;
+}
+
+.export_button:disabled:hover{
+  transform:scale(1);
 }
 
 @media (max-width: 500px) {

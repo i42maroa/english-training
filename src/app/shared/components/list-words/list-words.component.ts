@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { closeEditButtons, deleteWord, loadWords, modalModifyWord, showEditButtons } from 'src/app/state/actions/words.actions';
 import { selectWords, selectShowEditButtons, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
 import { Word, WordTypeSearch } from '../../models/word.interface';
