@@ -12,7 +12,7 @@ import { selectShowModalWord, selectWords } from 'src/app/state/selectors/words.
 })
 export class LandingPageComponent implements OnInit {
 
-  showModal$:Observable<boolean> = new Observable<boolean>();
+
   wordList$:Observable<ReadonlyArray<Word>> = new Observable<ReadonlyArray<Word>>();
   wordsArrayList$:BehaviorSubject<ReadonlyArray<Word>> = new BehaviorSubject<ReadonlyArray<Word>>([]);
   exportButtonDisabled:boolean = false;
@@ -22,7 +22,6 @@ export class LandingPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.showModal$ = this.store.select(selectShowModalWord);
     this.wordList$= this.store.select(selectWords);
     this.wordList$.subscribe(words => {
       this.wordsArrayList$.next(words);
