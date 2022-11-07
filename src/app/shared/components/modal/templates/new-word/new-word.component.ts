@@ -71,7 +71,8 @@ export class NewWordComponent implements OnInit {
       translate: this.form.value.translateWord.toLowerCase(),
       createdAt: dateToday.toDateString(),
       name:this.form.value.inputWord.toLowerCase(),
-      wordType:this.form.value.typeWord
+      wordType:this.form.value.typeWord,
+      examples:[]
     };
 
     this.isMod ?

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, exhaustMap, switchMap, tap, mergeMap } from 'rxjs/operators';
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { WordService } from 'src/app/core/services/word.service';
 import { Word } from 'src/app/shared/models/word.interface';
-import { addedWord, addWord, addWordError, deletedWord, deleteWord, deleteWordError, exportedPDF, exportPDF, exportPDFError, loadWords, loadWordsError, modifiedWord, modifiedWordError, modifyWord, nextTypeWord, prevTypeWord, retrieveWordList } from '../actions/words.actions';
+import { addedWord, addWord, addWordError, deletedWord, deleteWord, deleteWordError, exportedPDF, exportPDF, exportPDFError, goToDetailWordPage, loadWords, loadWordsError, modifiedWord, modifiedWordError, modifyWord, nextTypeWord, prevTypeWord, retrieveWordList } from '../actions/words.actions';
 
 @Injectable()
 export class WordEffects {
@@ -121,9 +122,20 @@ export class WordEffects {
   );
 
 
+  goToDetailWordPage$ = createEffect(() => this.actions$.pipe(
+    ofType(goToDetailWordPage),
+    map( () => {
+      this.router.navigate(['/','detail']);
+      return loadWords();
+    })
+   )
+  );
+
+
   constructor(
     private actions$: Actions,
     private wordsService: WordService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 }

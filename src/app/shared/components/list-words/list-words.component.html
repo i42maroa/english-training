@@ -9,7 +9,7 @@
         </div>
     </div>
     <hr>
-    <div class="line" *ngFor="let word of wordList$ | async">
+    <div class="line" *ngFor="let word of wordList$ | async" (click)="goToDetail(word)">
 
         <p class="strong_word">{{word.name}}</p>
         <p>{{word.translate}}</p>

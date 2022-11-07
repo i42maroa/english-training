@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="header_container" >
+    {{ (word$ | async)!.name}}
+    {{ (word$ | async)!.translate}}
+  </div>
+  <hr>
+  <div>
+    {{ (word$ | async)!.moreInfo}}
+  </div>
+
+  <div class="examples_container" >
+    <div class="examples_header">
+      <h3>Examples</h3>
+      <button >+</button>
+    </div>
+    <div class="examples_body" *ngFor="let example of (word$ | async)!.examples">
+      <p>{{example.original}}</p>
+      <p>{{example.original}}</p>
+    </div>
+
+  </div>
+</div>

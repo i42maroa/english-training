@@ -12,7 +12,8 @@ export interface WordState{
     modalWord:ModalState,
     showAddButton:boolean,
     showEditButtons:boolean,
-    typeWordSearch:number
+    typeWordSearch:number,
+    wordDetail?:Word
 }
 
 export const PREDIFINED_WORD_STATE:WordState = {

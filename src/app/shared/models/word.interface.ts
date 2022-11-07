@@ -3,7 +3,14 @@ export interface Word{
     name:string,
     translate:string,
     wordType:WordType,
-    createdAt:string
+    createdAt:string,
+    moreInfo?:string,
+    examples:ExamplePhrases[]
+}
+
+export interface ExamplePhrases {
+    original:string;
+    translation:string
 }
 
 export type WordType = 'noun' | 'verb' | 'adj' | 'phVb' | 'exp'

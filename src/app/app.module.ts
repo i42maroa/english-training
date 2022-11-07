@@ -33,6 +33,8 @@ import { SpinnerComponent } from './core/components/spinner/spinner.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { DeleteWordComponent } from './shared/components/modal/templates/delete-word/delete-word.component';
 import { NewWordComponent } from './shared/components/modal/templates/new-word/new-word.component';
+import { WordDetailComponent } from './shared/components/word-detail/word-detail.component';
+import { DetailWordPageComponent } from './page/detail-word-page/detail-word-page.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { NewWordComponent } from './shared/components/modal/templates/new-word/n
     SpinnerComponent,
     ModalComponent,
     DeleteWordComponent,
-    NewWordComponent
+    NewWordComponent,
+    WordDetailComponent,
+    DetailWordPageComponent
   ],
   imports: [
     BrowserAnimationsModule,

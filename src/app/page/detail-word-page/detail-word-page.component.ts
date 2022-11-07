@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Word } from 'src/app/shared/models/word.interface';
+import { selectWordModalWord } from 'src/app/state/selectors/words.selectors';
 
 @Component({
   selector: 'app-detail-word-page',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailWordPageComponent implements OnInit {
 
-  constructor() { }
+  word$:Observable<Word> = new Observable<Word>();
+  constructor(
+    private readonly store: Store
+  ) { }
 
   ngOnInit(): void {
+    this.word$ = this.store.select(selectWordModalWord);
   }
+
+
 
 }

@@ -32,3 +32,6 @@ export const prevTypeWord = createAction('[Change word type] try previous word t
 export const exportPDF = createAction('[Export PDF] try export list to PDF', props<{words: ReadonlyArray<Word>}>());
 export const exportedPDF = createAction('[Export PDF] export list to PDF sucsessful');
 export const exportPDFError = createAction('[Export PDF] error to export PDF');
+
+
+export const goToDetailWordPage = createAction('[Details word] go to detail page', props<{word:Word}>());
