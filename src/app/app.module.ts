@@ -35,6 +35,7 @@ import { DeleteWordComponent } from './shared/components/modal/templates/delete-
 import { NewWordComponent } from './shared/components/modal/templates/new-word/new-word.component';
 import { WordDetailComponent } from './shared/components/word-detail/word-detail.component';
 import { DetailWordPageComponent } from './page/detail-word-page/detail-word-page.component';
+import { NewExampleComponent } from './shared/components/modal/templates/new-example/new-example.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { DetailWordPageComponent } from './page/detail-word-page/detail-word-pag
     DeleteWordComponent,
     NewWordComponent,
     WordDetailComponent,
-    DetailWordPageComponent
+    DetailWordPageComponent,
+    NewExampleComponent
   ],
   imports: [
     BrowserAnimationsModule,

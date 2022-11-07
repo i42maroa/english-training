@@ -1,0 +1,14 @@
+
+<div class="modal_header">
+  <h3>{{ modalTitle }}</h3>
+</div>
+<form [formGroup]="form" class="form_container">
+  <div class="input_group">
+      <input class="form_input" formControlName="original" type="text" placeholder="Phrase original">
+  </div>
+  <div class="input_group">
+      <input class="form_input" formControlName="translation" type="text" placeholder="Translation">
+  </div>
+
+  <button type="button" [disabled]="sendButton" (click)="saveExample()">Save</button>
+</form>

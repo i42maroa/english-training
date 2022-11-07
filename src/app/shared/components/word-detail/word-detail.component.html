@@ -11,7 +11,7 @@
   <div class="examples_container" >
     <div class="examples_header">
       <h3>Examples</h3>
-      <button >+</button>
+      <button (click)="addExample()">+</button>
     </div>
     <div class="examples_body" *ngFor="let example of (word$ | async)!.examples">
       <p>{{example.original}}</p>

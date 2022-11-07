@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Word } from 'src/app/shared/models/word.interface';
+import { modalAddExample } from 'src/app/state/actions/words.actions';
 import { selectWordModalWord } from 'src/app/state/selectors/words.selectors';
 
 @Component({

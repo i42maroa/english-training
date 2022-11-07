@@ -3,6 +3,7 @@ import { Word } from '../../models/word.interface';
 import { Observable } from 'rxjs';
 import { selectWordDetail } from 'src/app/state/selectors/words.selectors';
 import { Store } from '@ngrx/store';
+import { modalAddExample } from 'src/app/state/actions/words.actions';
 
 @Component({
   selector: 'app-word-detail',
@@ -19,6 +20,10 @@ export class WordDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.word$ = this.store.select(selectWordDetail);
+  }
+
+  addExample(){
+    this.store.dispatch(modalAddExample());
   }
 
 }

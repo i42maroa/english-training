@@ -4,7 +4,7 @@ import { Word, WordTypeSearch } from 'src/app/shared/models/word.interface';
 export const modalAddWord = createAction('[Modal word] show modal word');
 export const modalDeleteWord = createAction('[Modal word] show modal delete word', props<{word:Word}>());
 export const modalModifyWord = createAction('[Modal word] show modify modal word', props<{word:Word}>());
-
+export const modalAddExample = createAction('[Modal word] show modal add example');
 export const closeModal = createAction('[Modal word] close modal ');
 
 export const showEditButtons = createAction('[Edit buttons] show edit buttons');
@@ -35,3 +35,6 @@ export const exportPDFError = createAction('[Export PDF] error to export PDF');
 
 
 export const goToDetailWordPage = createAction('[Details word] go to detail page', props<{word:Word}>());
+
+export const addExampleWord = createAction('[Details word] try add example');
+export const addedExampleWord = createAction('[Details word] example added');

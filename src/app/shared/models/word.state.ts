@@ -2,8 +2,17 @@ import { Word, WordTypeSearch, WORD_TYPE_SEARCH } from "./word.interface";
 
 export interface ModalState{
     show:boolean,
-    type: 'modify' | 'new' | 'delete',
+    type: 'modify' | 'new' | 'delete' | 'new-example',
     wordPrecharged?:Word
+}
+
+const mockWord:Word = {
+  createdAt:"",
+  examples:[],
+  name:'hi',
+  translate:'hola',
+  wordType:'noun',
+  moreInfo:'es un saludo que normalmente se usa'
 }
 
 export interface WordState{
@@ -25,5 +34,8 @@ export const PREDIFINED_WORD_STATE:WordState = {
     },
     showAddButton:true,
     showEditButtons:false,
-    typeWordSearch: 0
+    typeWordSearch: 0,
+    wordDetail:mockWord
 }
+
+
