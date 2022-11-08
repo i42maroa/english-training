@@ -24,31 +24,14 @@
 
 hr{
   height:0;
-  border: 2px solid var(--secondary-color);
+  border: 1px solid var(--secondary-color);
   border-radius: 10px;
   background-color: var(--secondary-color);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.not_values{
-  text-align: center;
-  padding: 1rem 0;
-  font-style: italic;
-}
-
-.line{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)), 1fr;
-  justify-items: center;
-  // flex-direction: row;
-   margin: 0.5rem 0;
-
-}
-
-.line p{
-  margin: 0.3rem auto;
-  text-align: left;
+.hr_head{
+  margin-top: 1rem;
 }
 
 .strong_word{
@@ -76,4 +59,79 @@ transition: 0.2s;
 
 .edition_icon{
   margin:  0.3rem;
+}
+
+.examples_container{
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.examples_header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.examples_body{
+  display: flex;
+  flex-direction: column;
+}
+
+.list_examples{
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+}
+
+.more_info{
+  margin: 2rem auto 1rem auto;
+}
+
+.strong_word{
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.italic_word{
+  font-style: italic;
+  margin: auto 0;
+}
+
+.last_change{
+  margin: auto;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.translate_word{
+  font-style: italic;
+  color: var(--secondary-color);
+}
+
+
+.examples_header h3{
+  margin: auto 0;
+  color: var(--secondary-color);
+}
+
+.close_item{
+  font-weight: 800;
+  font-size: 35px;
+  cursor: pointer;
+  color: var(--secondary-color);
+}
+
+.close_item:hover{
+  transform:scale(1.1);
+}
+
+.button_container{
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem auto;
+}
+
+
+.button_container button{
+  margin: 0 0.5rem;
 }

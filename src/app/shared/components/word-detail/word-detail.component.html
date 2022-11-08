@@ -1,22 +1,40 @@
 <div class="container">
   <div class="header_container" >
-    {{ (word$ | async)!.name}}
-    {{ (word$ | async)!.translate}}
-  </div>
-  <hr>
-  <div>
-    {{ (word$ | async)!.moreInfo}}
+    <div>
+      <h2 class="strong_word">{{ (word$ | async)!.name | uppercase}}</h2>
+      <h4 class="translate_word">{{ (word$ | async)!.translate }}</h4>
+    </div>
+    <div class="italic_word">{{ (word$ | async)!.wordType }}</div>
   </div>
 
-  <div class="examples_container" >
+  <div *ngIf="(word$ | async)!.moreInfo" class="more_info" >
+    <p>{{ (word$ | async)!.moreInfo }}</p>
+  </div>
+
+  <div class="examples_container" *ngIf="(word$ | async)!.examples && (word$ | async)!.examples.length !== 0" >
     <div class="examples_header">
       <h3>Examples</h3>
-      <button (click)="addExample()">+</button>
+      <div class="close_item" (click)="addExample()">+</div>
     </div>
-    <div class="examples_body" *ngFor="let example of (word$ | async)!.examples">
-      <p>{{example.original}}</p>
-      <p>{{example.original}}</p>
+    <hr>
+    <div class="examples_body" >
+      <div class="list_examples" *ngFor="let example of (word$ | async)!.examples">
+        <p class="strong_word">{{example.original}}</p>
+        <p>{{example.translation}}</p>
+      </div>
     </div>
+  </div>
 
+  <div class="empty_examples" *ngIf="!(word$ | async)!.examples || (word$ | async)!.examples.length === 0">
+    <button>Add example</button>
+  </div>
+
+  <div class="button_container" >
+    <button (click)="modifyWord()">mod</button>
+    <button (click)="deleteWord()">del</button>
+  </div>
+
+  <div class="last_change" *ngIf="(word$ | async)!.createdAt">
+    <p>Last change in {{ (word$ | async)!.createdAt }}</p>
   </div>
 </div>
