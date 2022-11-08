@@ -57,17 +57,7 @@ hr{
     color: var(--secondary-color);
 }
 
-.icon{
-    width: 1.5rem;
-    height: 1.5rem;
-    cursor: pointer;
-    fill: var(--secondary-color);
-}
 
-.icon:hover{
-  transform:scale(1.1);
-  transition: 0.2s;
-}
 
 .edit_container{
     // width: 5rem;
@@ -75,6 +65,4 @@ hr{
     justify-content: space-evenly;
 }
 
-.edition_icon{
-    margin:  0.3rem;
-}
+

@@ -36,6 +36,11 @@ import { NewWordComponent } from './shared/components/modal/templates/new-word/n
 import { WordDetailComponent } from './shared/components/word-detail/word-detail.component';
 import { DetailWordPageComponent } from './page/detail-word-page/detail-word-page.component';
 import { NewExampleComponent } from './shared/components/modal/templates/new-example/new-example.component';
+import { ButtonComponent } from './shared/components/button/button.component';
+import { ModifyButtonComponent } from './shared/components/button/template/modify-button/modify-button.component';
+import { DeleteButtonComponent } from './shared/components/button/template/delete-button/delete-button.component';
+import { CloseButtonComponent } from './shared/components/button/template/close-button/close-button.component';
+import { AddCrossButtonComponent } from './shared/components/button/template/add-button/add-button.component';
 
 
 @NgModule({
@@ -55,7 +60,12 @@ import { NewExampleComponent } from './shared/components/modal/templates/new-exa
     NewWordComponent,
     WordDetailComponent,
     DetailWordPageComponent,
-    NewExampleComponent
+    NewExampleComponent,
+    ButtonComponent,
+    ModifyButtonComponent,
+    DeleteButtonComponent,
+    CloseButtonComponent,
+    AddCrossButtonComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -114,24 +114,14 @@ transition: 0.2s;
   color: var(--secondary-color);
 }
 
-.close_item{
-  font-weight: 800;
-  font-size: 35px;
-  cursor: pointer;
-  color: var(--secondary-color);
-}
-
-.close_item:hover{
-  transform:scale(1.1);
-}
 
 .button_container{
   display: flex;
   justify-content: center;
-  margin: 0.5rem auto;
+  margin: 1rem auto;
 }
 
 
-.button_container button{
+.button_container > *{
   margin: 0 0.5rem;
 }

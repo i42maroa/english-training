@@ -55,3 +55,16 @@ body{
 }
 
 
+.icon{
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+  fill: var(--secondary-color);
+}
+
+.icon:hover{
+transform:scale(1.1);
+transition: 0.2s;
+}
+
+
