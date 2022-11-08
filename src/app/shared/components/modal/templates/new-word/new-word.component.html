@@ -18,6 +18,10 @@
           <option *ngFor="let option of optionSelect" [value]="option.value">{{option.label}}</option>
       </select>
   </div>
+  <div class="input_group">
+    <input class="form_input" formControlName="moreInfo" type="text" placeholder="More info">
+  </div>
+
 
   <button type="button" [disabled]="sendButton" (click)="saveWord()">Save</button>
 </form>

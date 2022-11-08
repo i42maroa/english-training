@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Word, WordType, WORD_TYPE, WORD_TYPE_SEARCH } from 'src/app/shared/models/word.interface';
+import { ExamplePhrases, Word, WordType, WORD_TYPE, WORD_TYPE_SEARCH } from 'src/app/shared/models/word.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectModalWord, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
+import { selectModalWord, selectWordModalWord, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
 import { addWord,  modifyWord } from 'src/app/state/actions/words.actions';
 
 const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa&text=';
@@ -21,10 +21,12 @@ export class NewWordComponent implements OnInit {
   translateButton:boolean = true;
   wordPreloaded:Observable<Word> = new Observable<Word>();
   wordType$:BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  wordPreLoaded$:BehaviorSubject<Word> = new BehaviorSubject<Word>({createdAt:'',name:'',translate:'',wordType:'noun',examples:[]});
 
   isMod:boolean = false;
   idPrecharge?:string = "";
   modalTitle:string = '';
+  examples:ExamplePhrases[]= []
 
   optionSelect: {label:string; value:WordType}[] = WORD_TYPE;
 
@@ -39,6 +41,7 @@ export class NewWordComponent implements OnInit {
       inputWord: new FormControl('', Validators.required),
       translateWord: new FormControl('', Validators.required),
       typeWord: new FormControl(this.getWordTypeDefault, Validators.required),
+      moreInfo: new FormControl(''),
     });
 
     this.form.valueChanges.subscribe(_=>{
@@ -48,20 +51,24 @@ export class NewWordComponent implements OnInit {
     });
 
     this.store.select(selectModalWord).subscribe( modalStatus => {
-
       this.modalTitle = modalStatus.type === 'new'? "Add new word" : "Modify word";
       this.isMod = modalStatus.type === 'new'? false:true;
-
-      if(modalStatus.wordPrecharged){
-        this.form.patchValue({
-          inputWord: modalStatus.wordPrecharged!.name,
-          translateWord: modalStatus.wordPrecharged!.translate,
-          typeWord: modalStatus.wordPrecharged!.wordType
-        })
-
-        this.idPrecharge = modalStatus.wordPrecharged!.id!
-      }
+      this.isMod && this.preloadWordToModify();
     })
+  }
+
+  preloadWordToModify(){
+    this.store.select(selectWordModalWord).subscribe( word => this.wordPreLoaded$.next(word));
+    const word = this.wordPreLoaded$.getValue();
+    this.form.patchValue({
+      inputWord: word.name,
+      translateWord: word.translate,
+      typeWord: word.wordType,
+      moreInfo: word.moreInfo ?? ''
+    })
+
+    this.examples = word.examples;
+    this.idPrecharge = word.id!;
   }
 
   saveWord(){
@@ -72,7 +79,8 @@ export class NewWordComponent implements OnInit {
       createdAt: dateToday.toDateString(),
       name:this.form.value.inputWord.toLowerCase(),
       wordType:this.form.value.typeWord,
-      examples:[]
+      moreInfo:this.form.value.moreInfo,
+      examples: this.examples
     };
 
     this.isMod ?
