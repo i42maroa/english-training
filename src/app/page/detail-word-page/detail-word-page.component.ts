@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Word } from 'src/app/shared/models/word.interface';
-import { modalAddExample } from 'src/app/state/actions/words.actions';
-import { selectWordModalWord } from 'src/app/state/selectors/words.selectors';
+import { loadWord } from 'src/app/state/actions/words.actions';
 
 @Component({
   selector: 'app-detail-word-page',
@@ -14,11 +14,13 @@ export class DetailWordPageComponent implements OnInit {
 
   word$:Observable<Word> = new Observable<Word>();
   constructor(
-    private readonly store: Store
+    private readonly store: Store,
+    private readonly route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.word$ = this.store.select(selectWordModalWord);
+    const wordId = this.route.snapshot.params['word'];
+    this.store.dispatch(loadWord({wordId}));
   }
 
 

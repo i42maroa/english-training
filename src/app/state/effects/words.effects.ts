@@ -6,7 +6,7 @@ import { map, catchError, exhaustMap, switchMap, tap, mergeMap } from 'rxjs/oper
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { WordService } from 'src/app/core/services/word.service';
 import { Word } from 'src/app/shared/models/word.interface';
-import { addedWord, addWord, addWordError, deletedWord, deleteWord, deleteWordError, exportedPDF, exportPDF, exportPDFError, goToDetailWordPage, loadWords, loadWordsError, modifiedWord, modifiedWordError, modifyWord, nextTypeWord, prevTypeWord, retrieveWordList } from '../actions/words.actions';
+import { addedWord, addWord, addWordError, deletedWord, deleteWord, deleteWordError, exportedPDF, exportPDF, exportPDFError, goToDetailWordPage, loadWord, loadWords, loadWordsError, modifiedWord, modifiedWordError, modifyWord, nextTypeWord, prevTypeWord, retrieveWordDetail, retrieveWordList } from '../actions/words.actions';
 
 @Injectable()
 export class WordEffects {
@@ -124,12 +124,26 @@ export class WordEffects {
 
   goToDetailWordPage$ = createEffect(() => this.actions$.pipe(
     ofType(goToDetailWordPage),
-    map( () => {
-      this.router.navigate(['/','detail']);
+    map( (word) => {
+      this.router.navigate(['/','detail', word.word.id!]);
       return loadWords();
     })
    )
   );
+
+  loadWord$ = createEffect(() => this.actions$.pipe(
+    ofType(loadWord),
+    switchMap((status) => this.wordsService.getWord(status.wordId).pipe(
+        map(word =>{
+          return retrieveWordDetail({word})
+        } ),
+        catchError(error => of(loadWordsError({error})))
+      ))
+    )
+  );
+
+
+
 
 
   constructor(

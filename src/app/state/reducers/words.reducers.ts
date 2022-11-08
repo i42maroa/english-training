@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { WORD_TYPE, WORD_TYPE_SEARCH } from 'src/app/shared/models/word.interface';
+import { WORD_TYPE_SEARCH } from 'src/app/shared/models/word.interface';
 import { PREDIFINED_WORD_STATE, WordState } from 'src/app/shared/models/word.state';
-import { addedWord, modalAddWord,  loadWords, modalModifyWord, retrieveWordList, addWord, modifyWord, modifiedWord, deleteWord, deletedWord, showEditButtons, closeEditButtons, nextTypeWord, prevTypeWord, exportPDF, exportedPDF, exportPDFError, closeModal, modalDeleteWord, goToDetailWordPage, modalAddExample } from '../actions/words.actions';
+import { addedWord, modalAddWord,  loadWords, modalModifyWord, retrieveWordList, addWord, modifyWord, modifiedWord, deleteWord, deletedWord, showEditButtons, closeEditButtons, nextTypeWord, prevTypeWord, exportPDF, exportedPDF, exportPDFError, closeModal, modalDeleteWord, goToDetailWordPage, modalAddExample, retrieveWordDetail } from '../actions/words.actions';
 
 export const initialState:WordState = PREDIFINED_WORD_STATE;
 
@@ -69,8 +69,9 @@ export const wordReducer = createReducer(
   on(exportPDFError, (state) => {
     return {...state, loading:false }
   }),
-  on(goToDetailWordPage, (state, {word}) => {
+  on(retrieveWordDetail, (state, {word}) => {
     return {...state, wordDetail:word }
   })
+
 );
 

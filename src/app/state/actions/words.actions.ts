@@ -36,5 +36,8 @@ export const exportPDFError = createAction('[Export PDF] error to export PDF');
 
 export const goToDetailWordPage = createAction('[Details word] go to detail page', props<{word:Word}>());
 
+export const loadWord = createAction('[Word detail] Load word', props<{wordId:string}>());
+export const retrieveWordDetail = createAction('[Word detail] retrieve word success', props<{word:Word}>());
+
 export const addExampleWord = createAction('[Details word] try add example');
 export const addedExampleWord = createAction('[Details word] example added');

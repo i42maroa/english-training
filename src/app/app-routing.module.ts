@@ -5,7 +5,7 @@ import { LandingPageComponent } from './page/landing-page/landing-page.component
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
-  { path: 'detail', component: DetailWordPageComponent },
+  { path: 'detail/:word', component: DetailWordPageComponent },
 ];
 
 @NgModule({

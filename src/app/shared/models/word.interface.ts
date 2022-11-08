@@ -5,7 +5,7 @@ export interface Word{
     wordType:WordType,
     createdAt:string,
     moreInfo?:string,
-    examples:ExamplePhrases[]
+    examples:Array<ExamplePhrases>
 }
 
 export interface ExamplePhrases {

@@ -35,6 +35,10 @@ export class FirestoreService {
         this.db.collection(collection, ref => ref.where('wordType', '==', WORD_TYPE_SEARCH[type].value)).valueChanges({idField:'id'});
     }
 
+    getWord(idWord:string){
+      return this.db.collection(collection).doc(idWord).valueChanges({idField:'id'});
+    }
+
     deleteWord(word:Word){
       return this.db.collection(collection).doc(word.id!).delete();
     }

@@ -9,9 +9,9 @@
         </div>
     </div>
     <hr>
-    <div class="line" *ngFor="let word of wordList$ | async" (click)="goToDetail(word)">
+    <div class="line" *ngFor="let word of wordList$ | async" >
 
-        <p class="strong_word">{{word.name}}</p>
+        <p class="strong_word" (click)="goToDetail(word)">{{word.name}}</p>
         <p>{{word.translate}}</p>
 
         <div class="edit_container" *ngIf="showEditButtons$ | async">

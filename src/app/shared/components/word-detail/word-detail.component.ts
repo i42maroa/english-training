@@ -20,6 +20,7 @@ export class WordDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.word$ = this.store.select(selectWordDetail);
     this.word$.subscribe(word => this.wordLoaded$.next(word));
   }

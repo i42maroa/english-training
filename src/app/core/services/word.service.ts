@@ -33,6 +33,10 @@ export class WordService {
     return from(this.firestore.getWordByType()) as Observable<Word[]>;
   }
 
+  getWord(idWord:string): Observable<Word>{
+    return from(this.firestore.getWord(idWord)) as Observable<Word>;
+  }
+
   deleteWord(word:Word){
     return from(this.firestore.deleteWord(word));
   }
