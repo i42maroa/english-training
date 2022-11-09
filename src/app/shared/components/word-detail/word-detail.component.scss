@@ -17,54 +17,19 @@
   justify-content: space-between;
 }
 
-.header_container .icon{
-  margin: auto 0;
-}
-
-
-hr{
-  height:0;
-  border: 1px solid var(--secondary-color);
-  border-radius: 10px;
-  background-color: var(--secondary-color);
-  margin-bottom: 0.5rem;
+.word{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  width: 80rem;
 }
 
 .hr_head{
-  margin-top: 1rem;
-}
-
-.strong_word{
-  font-weight: bold;
-  color: var(--secondary-color);
-}
-
-.icon{
-  width: 1.5rem;
-  height: 1.5rem;
-  cursor: pointer;
-  fill: var(--secondary-color);
-}
-
-.icon:hover{
-transform:scale(1.1);
-transition: 0.2s;
-}
-
-.edit_container{
-  // width: 5rem;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.edition_icon{
-  margin:  0.3rem;
+  margin: 1rem auto ;
 }
 
 .examples_container{
   display: flex;
   flex-direction: column;
-  margin: 1rem 0;
 }
 
 .examples_header{
@@ -84,17 +49,26 @@ transition: 0.2s;
 }
 
 .more_info{
-  margin: 2rem auto 1rem auto;
+  margin: 1rem 0 1rem 0;
 }
 
 .strong_word{
   font-weight: bold;
-  color: var(--secondary-color);
+  color:var(--secondary-color);
+
+}
+.name_word::first-letter,
+.strong_word::first-letter,
+.italic_word::first-letter,
+.translate_word::first-letter,
+.more_info::first-letter{
+  text-transform: capitalize;
 }
 
 .italic_word{
   font-style: italic;
-  margin: auto 0;
+  margin: auto 0.5rem auto auto;
+  min-height:1rem;
 }
 
 .last_change{
@@ -103,15 +77,20 @@ transition: 0.2s;
   font-size: 12px;
 }
 
+.name_word{
+  color: var(--secondary-color);
+}
+
 .translate_word{
   font-style: italic;
   color: var(--secondary-color);
+  margin: auto 0;
 }
 
 
 .examples_header h3{
   margin: auto 0;
-  color: var(--secondary-color);
+  color: var(--main-color);
 }
 
 
@@ -121,7 +100,29 @@ transition: 0.2s;
   margin: 1rem auto;
 }
 
-
 .button_container > *{
   margin: 0 0.5rem;
+}
+
+.empty_examples{
+  display: flex;
+  margin: auto;
+}
+
+.empty_examples button{
+  width: fit-content;
+  height: fit-content;
+  margin: 1rem auto;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  cursor:pointer;
+  background: linear-gradient(to bottom right,var(--main-color),var(--secondary-color));
+  color: #fff;
+}
+
+.empty_examples button:disabled{
+  color: #eee ;
+  background: var(--background-color-two);
+  cursor: not-allowed;
 }

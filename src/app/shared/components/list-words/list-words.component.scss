@@ -16,17 +16,11 @@
 
 .word_selector{
   margin: auto;
-  width: 80%;
+  width: 70%;
 }
 
 
-hr{
-    height:0;
-    border: 2px solid var(--secondary-color);
-    border-radius: 10px;
-    background-color: var(--secondary-color);
-    margin-bottom: 1rem;
-}
+
 
 .not_values{
     text-align: center;
@@ -37,16 +31,14 @@ hr{
 .line{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)), 1fr;
     justify-items: center;
     // flex-direction: row;
-     margin: 0.5rem 0;
+    margin: 0.5rem ;
 
 }
 
 .line p{
-    margin: 0.3rem auto;
-    text-align: left;
+    text-align: center;
     cursor: pointer;
 }
 
