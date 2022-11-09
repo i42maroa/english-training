@@ -8,17 +8,15 @@
     box-shadow: var(--box-shadow);
 }
 
-.header_container h2{
-    text-align: left;
-}
-
 .header_container{
     display: flex;
-    justify-content: space-between;
+    margin: auto;
+    width: 100%;
 }
 
-.header_container .icon{
-    margin: auto 0;
+.word_selector{
+  margin: auto;
+  width: 80%;
 }
 
 

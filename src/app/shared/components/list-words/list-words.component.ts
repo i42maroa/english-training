@@ -28,21 +28,21 @@ export class ListWordsComponent implements OnInit {
     this.store.dispatch(loadWords())
   }
 
-  updateWord(word:Word){
-    this.store.dispatch(modalModifyWord({word}));
-  }
+  // updateWord(word:Word){
+  //   this.store.dispatch(modalModifyWord({word}));
+  // }
 
-  deleteWord(word:Word){
-    this.store.dispatch(modalDeleteWord({word}))
-  }
+  // deleteWord(word:Word){
+  //   this.store.dispatch(modalDeleteWord({word}))
+  // }
 
-  showEditButtons(){
-    this.store.dispatch(showEditButtons());
-  }
+  // showEditButtons(){
+  //   this.store.dispatch(showEditButtons());
+  // }
 
-  closeEditButtons(){
-    this.store.dispatch(closeEditButtons());
-  }
+  // closeEditButtons(){
+  //   this.store.dispatch(closeEditButtons());
+  // }
 
   goToDetail(word:Word){
     this.store.dispatch(goToDetailWordPage({word}));
