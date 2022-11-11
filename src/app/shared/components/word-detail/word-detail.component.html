@@ -15,17 +15,32 @@
     <p>{{ (word$ | async)!.moreInfo }}</p>
   </div>
 
+  <div class="button_container" >
+    <app-button [type]="'modify'" (click)="modifyWord()"></app-button>
+    <app-button [type]="'delete'" (click)="deleteWord()"></app-button>
+  </div>
+
 
   <div class="examples_container" *ngIf="(word$ | async)!.examples && (word$ | async)!.examples.length !== 0" >
     <div class="examples_header">
       <h3 >EXAMPLES</h3>
-      <app-button [type]="'add'" (click)="addExample()"></app-button>
+      <div class="show_buttons_container">
+        <app-button [type]="'add'" (click)="addExample()"></app-button>
+        <app-button [type]="'modify'" (click)="showModifyButtonsExample()"></app-button>
+      </div>
     </div>
     <div class="examples_body" >
       <div class="list_examples" *ngFor="let example of (word$ | async)!.examples">
-        <p class="strong_word">{{example.original}}</p>
-        <p>{{example.translation}}</p>
+        <div class="example_container">
+          <p class="strong_word">{{example.original}}</p>
+          <p>{{example.translation}}</p>
+        </div>
+        <div class="list_examples_container">
+          <app-button [type]="'modify'" (click)="modifyExample()"></app-button>
+          <app-button [type]="'delete'" (click)="deleteExample()"></app-button>
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -33,10 +48,7 @@
     <button (click)="addExample()">Add example</button>
   </div>
 
-  <div class="button_container" >
-    <app-button [type]="'modify'" (click)="modifyWord()"></app-button>
-    <app-button [type]="'delete'" (click)="deleteWord()"></app-button>
-  </div>
+
 
   <!-- <div class="last_change" *ngIf="(word$ | async)!.createdAt">
     <p>Last change in {{ (word$ | async)!.createdAt }}</p>

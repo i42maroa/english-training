@@ -38,4 +38,16 @@ export class WordDetailComponent implements OnInit {
     const word = this.wordLoaded$.getValue();
     this.store.dispatch(modalDeleteWord({word}))
   }
+
+  showModifyButtonsExample(){
+
+  }
+
+  modifyExample(){
+
+  }
+
+  deleteExample(){
+
+  }
 }

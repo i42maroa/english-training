@@ -48,6 +48,17 @@
   margin: 0.5rem 0;
 }
 
+.list_examples_container{
+  display: flex;
+  justify-content: right;
+  margin: 1rem 0;
+}
+
+.example_container{
+  display: flex;
+  flex-direction: column;
+}
+
 .more_info{
   margin: 1rem 0 1rem 0;
 }
@@ -100,8 +111,8 @@
   margin: 1rem auto;
 }
 
-.button_container > *{
-  margin: 0 0.5rem;
+.button_container > *, .list_examples_container > *{
+  margin: auto 0.3rem;
 }
 
 .empty_examples{
@@ -125,4 +136,13 @@
   color: #eee ;
   background: var(--background-color-two);
   cursor: not-allowed;
+}
+
+.show_buttons_container{
+  display: flex;
+  margin: auto 0;
+}
+
+.show_buttons_container > *{
+  margin: auto 0.2rem;
 }
