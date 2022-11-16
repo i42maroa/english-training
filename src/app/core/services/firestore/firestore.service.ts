@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
-const collection = "word-develop"
+const collection = "word"
 
 @Injectable({
   providedIn: 'root'
