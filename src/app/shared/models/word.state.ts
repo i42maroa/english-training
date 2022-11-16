@@ -11,21 +11,12 @@ export interface ModalState{
 }
 
 const mockWord:Word = {
-  createdAt:"20-02-2022",
-  examples:[
-    {
-      original:'Hi, nice to meet you',
-      translation:'Hola, encantado de conocerte'
-    },
-    {
-      original:'Hi, nice to meet you',
-      translation:'Hola, encantado de conocerte'
-    }
-  ],
-  name:'avoid',
-  translate:'evitar',
+  createdAt:"",
+  examples:[],
+  name:'',
+  translate:'',
   wordType:'noun',
-  moreInfo:'Es un saludo que normalmente se usa',
+  moreInfo:'',
 }
 
 export interface WordState{
@@ -51,5 +42,3 @@ export const PREDIFINED_WORD_STATE:WordState = {
     typeWordSearch: 0,
     wordDetail:mockWord
 }
-
-
