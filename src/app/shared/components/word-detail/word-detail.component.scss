@@ -1,11 +1,24 @@
 .container{
   display: flex;
   flex-direction: column;
-  margin: 2rem 1rem;
+  margin: 0 1rem;
   padding: 1rem 2rem;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: var(--box-shadow);
+}
+
+.container_params{
+  margin: 1rem;
+}
+
+.main_button_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  min-height: 4rem;
 }
 
 .header_container h2{
@@ -23,8 +36,13 @@
   width: 80rem;
 }
 
+.word_container{
+  margin: auto 0;
+}
+
 .hr_head{
-  margin: 1rem auto ;
+  margin: 0 auto 1rem 0;
+  width: 85%;
 }
 
 .examples_container{
@@ -35,6 +53,7 @@
 .examples_header{
   display: flex;
   justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 
 .examples_body{
@@ -45,7 +64,11 @@
 .list_examples{
   display: flex;
   flex-direction: column;
-  margin: 0.5rem 0;
+  // margin: 0.5rem 0;
+  background: rgb(249, 248, 248);
+  margin: 0.2rem 0;
+  padding: 0.3rem;
+  border-radius: 2px;
 }
 
 .list_examples_container{
@@ -104,11 +127,22 @@
   color: var(--main-color);
 }
 
+.back_button{
+  display: flex;
+  justify-content: center;
+  margin:  auto 0;
+  cursor: pointer;
+}
 
 .button_container{
   display: flex;
   justify-content: center;
   margin: 1rem auto;
+}
+
+.button_action_container{
+  justify-content: right;
+  margin: 1rem 0 0.5rem auto;
 }
 
 .button_container > *, .list_examples_container > *{
@@ -120,7 +154,7 @@
   margin: auto;
 }
 
-.empty_examples button{
+.examples_container button{
   width: fit-content;
   height: fit-content;
   margin: 1rem auto;
@@ -132,7 +166,7 @@
   color: #fff;
 }
 
-.empty_examples button:disabled{
+.examples_container button:disabled{
   color: #eee ;
   background: var(--background-color-two);
   cursor: not-allowed;
@@ -144,5 +178,5 @@
 }
 
 .show_buttons_container > *{
-  margin: auto 0.2rem;
+  margin: 0 0.2rem;
 }
