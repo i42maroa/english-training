@@ -58,7 +58,7 @@ export const wordReducer = createReducer(
     return {...state, loading:false }
   }),
   on(loadWords, (state) => {
-    return {...state, loading:true }
+    return {...state, loading:true, showEditButtons:false, showAddButton:true }
   }),
   on(retrieveWordList, (state, {words}) => {
     return {...state, loading:false, words}
