@@ -6,7 +6,8 @@ import { Store } from '@ngrx/store';
 import { selectModalWord, selectWordModalWord, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
 import { addWord,  modifyWord } from 'src/app/state/actions/words.actions';
 
-const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa&text=';
+const REVERSO_URL_ENG = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa&text=';
+const REVERSO_URL_SPA = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=spa&tl=eng&text=';
 
 @Component({
   selector: 'app-new-word',
@@ -16,7 +17,8 @@ const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa
 export class NewWordComponent implements OnInit {
 
   form!:FormGroup;
-  searchText:string = REVERSO_URL;
+  searchTextEng:string = REVERSO_URL_ENG;
+  searchTextSpa:string = REVERSO_URL_SPA;
   sendButton:boolean = true;
   translateButton:boolean = true;
   wordPreloaded:Observable<Word> = new Observable<Word>();
@@ -47,7 +49,8 @@ export class NewWordComponent implements OnInit {
     this.form.valueChanges.subscribe(_=>{
       this.sendButton = !this.form.valid;
       this.translateButton = !this.form.value.inputWord ==! '';
-      this.searchText = REVERSO_URL + this.form.value.inputWord
+      this.searchTextEng = REVERSO_URL_ENG + this.form.value.inputWord;
+      this.searchTextSpa = REVERSO_URL_SPA + this.form.value.translateWord;
     });
 
     this.store.select(selectModalWord).subscribe( modalStatus => {
