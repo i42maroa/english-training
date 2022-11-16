@@ -3,8 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ExamplePhrases, Word, WordType, WORD_TYPE, WORD_TYPE_SEARCH } from 'src/app/shared/models/word.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectModalWord, selectWordModalWord, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
+import { selectModalType, selectModalWord, selectWordModalWord, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
 import { addWord,  modifyWord } from 'src/app/state/actions/words.actions';
+import { ModalType } from 'src/app/shared/models/word.state';
 
 const REVERSO_URL_ENG = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa&text=';
 const REVERSO_URL_SPA = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=spa&tl=eng&text=';
@@ -22,8 +23,10 @@ export class NewWordComponent implements OnInit {
   sendButton:boolean = true;
   translateButton:boolean = true;
   wordPreloaded:Observable<Word> = new Observable<Word>();
+
   wordType$:BehaviorSubject<number> = new BehaviorSubject<number>(0);
   wordPreLoaded$:BehaviorSubject<Word> = new BehaviorSubject<Word>({createdAt:'',name:'',translate:'',wordType:'noun',examples:[]});
+  modalType$:BehaviorSubject<ModalType> = new BehaviorSubject<ModalType>('new');
 
   isMod:boolean = false;
   idPrecharge?:string = "";
@@ -36,6 +39,7 @@ export class NewWordComponent implements OnInit {
     private readonly store:Store
   ) {
     this.store.select(selectWordTypeSearch).subscribe(type => this.wordType$.next(type));
+    this.store.select(selectModalType).subscribe(type => this.modalType$.next(type));
    }
 
   ngOnInit(): void {
@@ -53,11 +57,9 @@ export class NewWordComponent implements OnInit {
       this.searchTextSpa = REVERSO_URL_SPA + this.form.value.translateWord;
     });
 
-    this.store.select(selectModalWord).subscribe( modalStatus => {
-      this.modalTitle = modalStatus.type === 'new'? "Add new word" : "Modify word";
-      this.isMod = modalStatus.type === 'new'? false:true;
-      this.isMod && this.preloadWordToModify();
-    })
+    this.modalTitle = this.modalType$.getValue() === 'new'? "Add new word" : "Modify word";
+    this.isMod = this.modalType$.getValue() === 'modify';
+    this.isMod && this.preloadWordToModify()
   }
 
   preloadWordToModify(){
@@ -69,7 +71,6 @@ export class NewWordComponent implements OnInit {
       typeWord: word.wordType,
       moreInfo: word.moreInfo ?? ''
     })
-
     this.examples = word.examples;
     this.idPrecharge = word.id!;
   }

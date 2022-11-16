@@ -3,8 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ExamplePhrases, Word } from 'src/app/shared/models/word.interface';
+import { ModalType } from 'src/app/shared/models/word.state';
 import { modifyWord } from 'src/app/state/actions/words.actions';
-import { selectExampleIndexToDelete, selectExamplePrecharged, selectModalWord, selectPhraseExampleSelect, selectWordDetail } from 'src/app/state/selectors/words.selectors';
+import { selectExampleIndexToDelete, selectExamplePrecharged, selectModalType, selectModalWord, selectPhraseExampleSelect, selectWordDetail } from 'src/app/state/selectors/words.selectors';
 
 @Component({
   selector: 'app-new-example',
@@ -25,9 +26,13 @@ export class NewExampleComponent implements OnInit {
   phraseExample$:Observable<ExamplePhrases> = new Observable<ExamplePhrases>();
   exampleIndexToDelete$:BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
+  modalType$:BehaviorSubject<ModalType> = new BehaviorSubject<ModalType>('new-example');
+
   constructor(
     private readonly store:Store
-  ) { }
+  ) {
+    this.store.select(selectModalType).subscribe(type => this.modalType$.next(type));
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -38,11 +43,10 @@ export class NewExampleComponent implements OnInit {
     this.word$ = this.store.select(selectWordDetail);
     this.word$.subscribe(word => this.wordDetail$.next(word));
 
-    this.store.select(selectModalWord).subscribe( modalStatus => {
-      this.modalTitle = modalStatus.type === 'new'? 'Add new phrase example' : 'Modify phrase example';
-      this.isMod = modalStatus.type === 'new'? false:true;
-      this.isMod && this.preloadExampleToModify();
-    })
+
+    this.modalTitle = this.modalType$.getValue() === 'new-example'? 'Add new phrase example' : 'Modify phrase example';
+    this.isMod = this.modalType$.getValue() === 'modify-example';
+    this.isMod && this.preloadExampleToModify();
 
     this.phraseExample$ = this.store.select(selectPhraseExampleSelect);
     this.store.select(selectExampleIndexToDelete).subscribe(exampleIndex => this.exampleIndexToDelete$.next(exampleIndex));

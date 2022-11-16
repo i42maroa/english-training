@@ -29,6 +29,11 @@ export const selectModalWord = createSelector(
     (state:WordState) => state.modalWord
 )
 
+export const selectModalType = createSelector(
+  selectWordsFeature,
+  (state:WordState) => state.modalWord.type
+)
+
 export const selectShowModalWord = createSelector(
     selectWordsFeature,
     (state:WordState) => state.modalWord.show

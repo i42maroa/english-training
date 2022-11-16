@@ -69,7 +69,9 @@ export class WordEffects {
     ofType(deleteWord),
     exhaustMap(resp => this.wordsService.deleteWord(resp.word)
       .pipe(
-        map(_ => deletedWord({word:resp.word})),
+        map(_ => {
+          this.router.navigate(['/'])
+          return deletedWord({word:resp.word})}),
         catchError(error => of(deleteWordError({error, word:resp.word})))
       ))
     )

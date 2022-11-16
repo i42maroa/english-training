@@ -1,8 +1,10 @@
 import { ExamplePhrases, Word, WordTypeSearch, WORD_TYPE_SEARCH } from "./word.interface";
 
+export type ModalType = 'modify' | 'new' | 'delete' | 'new-example' | 'delete-example' | 'modify-example'
+
 export interface ModalState{
     show:boolean,
-    type: 'modify' | 'new' | 'delete' | 'new-example' | 'delete-example' | 'modify-example',
+    type: ModalType,
     wordPrecharged?:Word,
     examplePrecharged?:ExamplePhrases,
     indexExample?:number
