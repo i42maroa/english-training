@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Word } from '../../models/word.interface';
+import { ExamplePhrases, Word } from '../../models/word.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { selectWordDetail } from 'src/app/state/selectors/words.selectors';
+import { selectWordDetail, selectShowEditButtons } from 'src/app/state/selectors/words.selectors';
 import { Store } from '@ngrx/store';
-import { modalAddExample, modalDeleteWord, modalModifyWord } from 'src/app/state/actions/words.actions';
+import { closeEditButtons, deleteExampleWord, modalAddExample, modalDeleteExample, modalDeleteWord, modalModifyExample, modalModifyWord, modifyExampleWord, showEditButtons } from 'src/app/state/actions/words.actions';
 
 @Component({
   selector: 'app-word-detail',
@@ -14,18 +14,20 @@ export class WordDetailComponent implements OnInit {
 
   word$:Observable<Word> = new Observable<Word>();
   wordLoaded$:BehaviorSubject<Word> = new BehaviorSubject<Word>({createdAt:'',name:'',translate:'',wordType:'noun',examples:[]});
+  showEditButtons$:Observable<boolean> = new Observable<boolean>();
 
   constructor(
     private readonly store: Store
   ) { }
 
   ngOnInit(): void {
-
     this.word$ = this.store.select(selectWordDetail);
     this.word$.subscribe(word => this.wordLoaded$.next(word));
+    this.showEditButtons$ = this.store.select(selectShowEditButtons);
   }
 
   addExample(){
+
     this.store.dispatch(modalAddExample());
   }
 
@@ -36,18 +38,22 @@ export class WordDetailComponent implements OnInit {
 
   deleteWord(){
     const word = this.wordLoaded$.getValue();
-    this.store.dispatch(modalDeleteWord({word}))
+    this.store.dispatch(modalDeleteWord({word}));
   }
 
   showModifyButtonsExample(){
-
+    this.store.dispatch(showEditButtons());
   }
 
-  modifyExample(){
-
+  unShowModifyButtonsExample(){
+    this.store.dispatch(closeEditButtons());
   }
 
-  deleteExample(){
+  modifyExample(index:number, example:ExamplePhrases){
+    this.store.dispatch(modalModifyExample({index, example}));
+  }
 
+  deleteExample(index:number){
+    this.store.dispatch(modalDeleteExample({index}));
   }
 }

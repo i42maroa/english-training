@@ -6,7 +6,7 @@ import { map, catchError, exhaustMap, switchMap, tap, mergeMap } from 'rxjs/oper
 import { NotificationService } from 'src/app/core/services/notification/notification.service';
 import { WordService } from 'src/app/core/services/word.service';
 import { Word } from 'src/app/shared/models/word.interface';
-import { addedWord, addWord, addWordError, deletedWord, deleteWord, deleteWordError, exportedPDF, exportPDF, exportPDFError, goToDetailWordPage, loadWord, loadWords, loadWordsError, modifiedWord, modifiedWordError, modifyWord, nextTypeWord, prevTypeWord, retrieveWordDetail, retrieveWordList } from '../actions/words.actions';
+import { addedWord, addWord, addWordError, deletedWord, deleteExampleWord, deleteWord, deleteWordError, exportedPDF, exportPDF, exportPDFError, goToDetailWordPage, loadWord, loadWords, loadWordsError, modifiedWord, modifiedWordError, modifyWord, nextTypeWord, prevTypeWord, retrieveWordDetail, retrieveWordList } from '../actions/words.actions';
 
 @Injectable()
 export class WordEffects {
@@ -141,6 +141,7 @@ export class WordEffects {
       ))
     )
   );
+
 
 
 

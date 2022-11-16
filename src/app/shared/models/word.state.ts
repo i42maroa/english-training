@@ -1,9 +1,11 @@
-import { Word, WordTypeSearch, WORD_TYPE_SEARCH } from "./word.interface";
+import { ExamplePhrases, Word, WordTypeSearch, WORD_TYPE_SEARCH } from "./word.interface";
 
 export interface ModalState{
     show:boolean,
-    type: 'modify' | 'new' | 'delete' | 'new-example',
-    wordPrecharged?:Word
+    type: 'modify' | 'new' | 'delete' | 'new-example' | 'delete-example' | 'modify-example',
+    wordPrecharged?:Word,
+    examplePrecharged?:ExamplePhrases,
+    indexExample?:number
 }
 
 const mockWord:Word = {
@@ -39,7 +41,8 @@ export const PREDIFINED_WORD_STATE:WordState = {
     words:[],
     modalWord:{
         show:false,
-        type: 'new'
+        type: 'new',
+        indexExample:0
     },
     showAddButton:true,
     showEditButtons:false,

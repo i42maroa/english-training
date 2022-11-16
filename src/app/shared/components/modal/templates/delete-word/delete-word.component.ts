@@ -27,9 +27,4 @@ export class DeleteWordComponent implements OnInit {
   deleteWord(){
     this.store.dispatch(deleteWord({word: this.wordToDelete$.getValue()}));
   }
-
-  closeModal(){
-    this.store.dispatch(closeModal());
-  }
-
 }

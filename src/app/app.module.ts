@@ -41,6 +41,7 @@ import { ModifyButtonComponent } from './shared/components/button/template/modif
 import { DeleteButtonComponent } from './shared/components/button/template/delete-button/delete-button.component';
 import { CloseButtonComponent } from './shared/components/button/template/close-button/close-button.component';
 import { AddCrossButtonComponent } from './shared/components/button/template/add-button/add-button.component';
+import { DeleteExampleComponent } from './shared/components/modal/templates/delete-example/delete-example.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { AddCrossButtonComponent } from './shared/components/button/template/add
     ModifyButtonComponent,
     DeleteButtonComponent,
     CloseButtonComponent,
-    AddCrossButtonComponent
+    AddCrossButtonComponent,
+    DeleteExampleComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -1,12 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 import { WORD_TYPE_SEARCH } from 'src/app/shared/models/word.interface';
 import { PREDIFINED_WORD_STATE, WordState } from 'src/app/shared/models/word.state';
-import { addedWord, modalAddWord,  loadWords, modalModifyWord, retrieveWordList, addWord, modifyWord, modifiedWord, deleteWord, deletedWord, showEditButtons, closeEditButtons, nextTypeWord, prevTypeWord, exportPDF, exportedPDF, exportPDFError, closeModal, modalDeleteWord, goToDetailWordPage, modalAddExample, retrieveWordDetail } from '../actions/words.actions';
+import { addedWord, modalAddWord,  loadWords, modalModifyWord, retrieveWordList, addWord, modifyWord, modifiedWord, deleteWord, deletedWord, showEditButtons, closeEditButtons, nextTypeWord, prevTypeWord, exportPDF, exportedPDF, exportPDFError, closeModal, modalDeleteWord, goToDetailWordPage, modalAddExample, retrieveWordDetail, modalModifyExample, modalDeleteExample } from '../actions/words.actions';
 
 export const initialState:WordState = PREDIFINED_WORD_STATE;
 
 export const wordReducer = createReducer(
   initialState,
+
   on(modalAddWord, (state) => {
     return {...state, showAddButton:false, modalWord:{show:true,type:'new'} }
   }),
@@ -16,18 +17,28 @@ export const wordReducer = createReducer(
   on(modalAddExample, (state) => {
     return {...state, modalWord:{show:true,type:'new-example'} }
   }),
-  on(closeModal, (state) => {
-    return {...state, showAddButton:true, modalWord:{show:false, type:'new'} }
+  on(modalModifyExample, (state, {index, example}) => {
+    return {...state, modalWord:{show:true,type:'modify-example', indexExample:index, examplePrecharged:example} }
+  }),
+  on(modalDeleteExample, (state, {index}) => {
+    return {...state, modalWord:{show:true, type:'delete-example', indexExample:index} }
   }),
   on(modalModifyWord, (state, {word}) => {
     return {...state, showAddButton:false, modalWord:{show:true,type:'modify', wordPrecharged:word} }
   }),
+  on(closeModal, (state) => {
+    return {...state, showAddButton:true, modalWord:{show:false, type:'new'} }
+  }),
+
+
   on(showEditButtons, (state) => {
     return {...state, showEditButtons:true, showAddButton:false }
   }),
   on(closeEditButtons, (state) => {
     return {...state, showEditButtons:false, showAddButton:true }
   }),
+
+
   on(addWord, (state) => {
     return {...state, loading:true, showAddButton:true, modalWord:{show:false,type:'new'} }
   }),
