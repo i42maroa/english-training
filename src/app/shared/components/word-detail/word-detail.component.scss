@@ -1,0 +1,148 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 1rem;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+}
+
+.header_container h2{
+  text-align: left;
+}
+
+.header_container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.word{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  width: 80rem;
+}
+
+.hr_head{
+  margin: 1rem auto ;
+}
+
+.examples_container{
+  display: flex;
+  flex-direction: column;
+}
+
+.examples_header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.examples_body{
+  display: flex;
+  flex-direction: column;
+}
+
+.list_examples{
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+}
+
+.list_examples_container{
+  display: flex;
+  justify-content: right;
+  margin: 1rem 0;
+}
+
+.example_container{
+  display: flex;
+  flex-direction: column;
+}
+
+.more_info{
+  margin: 1rem 0 1rem 0;
+}
+
+.strong_word{
+  font-weight: bold;
+  color:var(--secondary-color);
+
+}
+.name_word::first-letter,
+.strong_word::first-letter,
+.italic_word::first-letter,
+.translate_word::first-letter,
+.more_info::first-letter{
+  text-transform: capitalize;
+}
+
+.italic_word{
+  font-style: italic;
+  margin: auto 0.5rem auto auto;
+  min-height:1rem;
+}
+
+.last_change{
+  margin: auto;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.name_word{
+  color: var(--secondary-color);
+}
+
+.translate_word{
+  font-style: italic;
+  color: var(--secondary-color);
+  margin: auto 0;
+}
+
+
+.examples_header h3{
+  margin: auto 0;
+  color: var(--main-color);
+}
+
+
+.button_container{
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
+}
+
+.button_container > *, .list_examples_container > *{
+  margin: auto 0.3rem;
+}
+
+.empty_examples{
+  display: flex;
+  margin: auto;
+}
+
+.empty_examples button{
+  width: fit-content;
+  height: fit-content;
+  margin: 1rem auto;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  cursor:pointer;
+  background: linear-gradient(to bottom right,var(--main-color),var(--secondary-color));
+  color: #fff;
+}
+
+.empty_examples button:disabled{
+  color: #eee ;
+  background: var(--background-color-two);
+  cursor: not-allowed;
+}
+
+.show_buttons_container{
+  display: flex;
+  margin: auto 0;
+}
+
+.show_buttons_container > *{
+  margin: auto 0.2rem;
+}

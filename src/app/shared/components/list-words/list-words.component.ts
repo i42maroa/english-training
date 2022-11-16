@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {  Observable } from 'rxjs';
-import { closeEditButtons,  loadWords, modalDeleteWord, modalModifyWord, showEditButtons } from 'src/app/state/actions/words.actions';
+import { closeEditButtons,  goToDetailWordPage,  loadWords, modalDeleteWord, modalModifyWord, showEditButtons } from 'src/app/state/actions/words.actions';
 import { selectWords, selectShowEditButtons, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
 import { Word } from '../../models/word.interface';
 
@@ -28,19 +28,23 @@ export class ListWordsComponent implements OnInit {
     this.store.dispatch(loadWords())
   }
 
-  updateWord(word:Word){
-    this.store.dispatch(modalModifyWord({word}));
-  }
+  // updateWord(word:Word){
+  //   this.store.dispatch(modalModifyWord({word}));
+  // }
 
-  deleteWord(word:Word){
-    this.store.dispatch(modalDeleteWord({word}))
-  }
+  // deleteWord(word:Word){
+  //   this.store.dispatch(modalDeleteWord({word}))
+  // }
 
-  showEditButtons(){
-    this.store.dispatch(showEditButtons());
-  }
+  // showEditButtons(){
+  //   this.store.dispatch(showEditButtons());
+  // }
 
-  closeEditButtons(){
-    this.store.dispatch(closeEditButtons());
+  // closeEditButtons(){
+  //   this.store.dispatch(closeEditButtons());
+  // }
+
+  goToDetail(word:Word){
+    this.store.dispatch(goToDetailWordPage({word}));
   }
 }

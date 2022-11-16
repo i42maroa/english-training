@@ -1,10 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { Word, WordTypeSearch } from 'src/app/shared/models/word.interface';
+import { ExamplePhrases, Word, WordTypeSearch } from 'src/app/shared/models/word.interface';
 
 export const modalAddWord = createAction('[Modal word] show modal word');
 export const modalDeleteWord = createAction('[Modal word] show modal delete word', props<{word:Word}>());
 export const modalModifyWord = createAction('[Modal word] show modify modal word', props<{word:Word}>());
-
+export const modalAddExample = createAction('[Modal word] show modal add example');
+export const modalDeleteExample = createAction('[Modal word] show modal delete example', props<{index:number}>());
+export const modalModifyExample = createAction('[Modal word] show modify modal example', props<{index:number, example:ExamplePhrases}>());
 export const closeModal = createAction('[Modal word] close modal ');
 
 export const showEditButtons = createAction('[Edit buttons] show edit buttons');
@@ -32,3 +34,18 @@ export const prevTypeWord = createAction('[Change word type] try previous word t
 export const exportPDF = createAction('[Export PDF] try export list to PDF', props<{words: ReadonlyArray<Word>}>());
 export const exportedPDF = createAction('[Export PDF] export list to PDF sucsessful');
 export const exportPDFError = createAction('[Export PDF] error to export PDF');
+
+
+export const goToDetailWordPage = createAction('[Details word] go to detail page', props<{word:Word}>());
+
+export const loadWord = createAction('[Word detail] Load word', props<{wordId:string}>());
+export const retrieveWordDetail = createAction('[Word detail] retrieve word success', props<{word:Word}>());
+
+export const addExampleWord = createAction('[Details word] try add example');
+export const addedExampleWord = createAction('[Details word] example added');
+
+export const modifyExampleWord = createAction('[Details word] try modify example', props<{index:number, example:ExamplePhrases}>());
+export const modifiedExampleWord = createAction('[Details word] example modified');
+
+export const deleteExampleWord = createAction('[Details word] try delete example', props<{index:number}>());
+export const deletedExampleWord = createAction('[Details word] example deleted');

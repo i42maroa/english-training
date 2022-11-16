@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="header_container" >
+    <div class="word">
+      <div>
+        <h2 class="name_word">{{ (word$ | async)!.name}}</h2>
+        <h4 class="translate_word">{{ (word$ | async)!.translate  }}</h4>
+      </div>
+      <div class="italic_word">{{ (word$ | async)!.wordType }}</div>
+    </div>
+
+  </div>
+  <hr class="hr_head">
+  <div *ngIf="(word$ | async)!.moreInfo" class="more_info" >
+    <p>{{ (word$ | async)!.moreInfo }}</p>
+  </div>
+
+  <div class="button_container" *ngIf="showEditButtons$ | async">
+    <app-button [type]="'modify'" (click)="modifyWord()"></app-button>
+    <app-button [type]="'delete'" (click)="deleteWord()"></app-button>
+  </div>
+
+  <div class="examples_container" *ngIf="(word$ | async)!.examples && (word$ | async)!.examples.length !== 0" >
+    <div class="examples_header">
+      <h3 >EXAMPLES</h3>
+      <div class="show_buttons_container" *ngIf=" !(showEditButtons$ | async )">
+        <app-button  [type]="'add'" (click)="addExample()"></app-button>
+      </div>
+    </div>
+    <div class="examples_body" >
+      <div class="list_examples" *ngFor="let example of (word$ | async)!.examples; let exampleIndex=index">
+        <div class="example_container">
+          <p class="strong_word">{{example.original}}</p>
+          <p>{{example.translation}}</p>
+        </div>
+        <div *ngIf=" showEditButtons$ | async " class="list_examples_container">
+          <app-button [type]="'modify'" (click)="modifyExample(exampleIndex, example)"></app-button>
+          <app-button [type]="'delete'" (click)="deleteExample(exampleIndex)"></app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty_examples" *ngIf="!(word$ | async)!.examples || (word$ | async)!.examples.length === 0">
+    <button (click)="addExample()">Add example</button>
+  </div>
+
+  <div class="button_container" *ngIf="!(showEditButtons$ | async )">
+    <app-button [type]="'modify'" (click)="showModifyButtonsExample()"></app-button>
+  </div>
+
+  <div class="button_container" *ngIf="showEditButtons$ | async">
+    <app-button  [type]="'close'" (click)="unShowModifyButtonsExample()"></app-button>
+  </div>
+</div>

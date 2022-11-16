@@ -29,6 +29,11 @@ export const selectModalWord = createSelector(
     (state:WordState) => state.modalWord
 )
 
+export const selectModalType = createSelector(
+  selectWordsFeature,
+  (state:WordState) => state.modalWord.type
+)
+
 export const selectShowModalWord = createSelector(
     selectWordsFeature,
     (state:WordState) => state.modalWord.show
@@ -37,6 +42,21 @@ export const selectShowModalWord = createSelector(
 export const selectWordModalWord = createSelector(
   selectWordsFeature,
   (state:WordState) => state.modalWord.wordPrecharged!
+)
+
+export const selectPhraseExampleSelect = createSelector(
+  selectWordsFeature,
+  (state:WordState) => state.wordDetail!.examples[state.modalWord.indexExample!]
+)
+
+export const selectExampleIndexToDelete = createSelector(
+  selectWordsFeature,
+  (state:WordState) => state.modalWord.indexExample!
+)
+
+export const selectExamplePrecharged = createSelector(
+  selectWordsFeature,
+  (state:WordState) => state.modalWord.examplePrecharged!
 )
 
 export const selectWordModalWordId = createSelector(
@@ -53,3 +73,9 @@ export const selectWordTypeSearchName = createSelector(
   selectWordsFeature,
   (state:WordState) => WORD_TYPE_SEARCH[state.typeWordSearch].label
 )
+
+export const selectWordDetail= createSelector(
+  selectWordsFeature,
+  (state:WordState) => state.wordDetail!
+)
+

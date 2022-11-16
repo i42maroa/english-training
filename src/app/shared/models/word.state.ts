@@ -1,9 +1,31 @@
-import { Word, WordTypeSearch, WORD_TYPE_SEARCH } from "./word.interface";
+import { ExamplePhrases, Word, WordTypeSearch, WORD_TYPE_SEARCH } from "./word.interface";
+
+export type ModalType = 'modify' | 'new' | 'delete' | 'new-example' | 'delete-example' | 'modify-example'
 
 export interface ModalState{
     show:boolean,
-    type: 'modify' | 'new' | 'delete',
-    wordPrecharged?:Word
+    type: ModalType,
+    wordPrecharged?:Word,
+    examplePrecharged?:ExamplePhrases,
+    indexExample?:number
+}
+
+const mockWord:Word = {
+  createdAt:"20-02-2022",
+  examples:[
+    {
+      original:'Hi, nice to meet you',
+      translation:'Hola, encantado de conocerte'
+    },
+    {
+      original:'Hi, nice to meet you',
+      translation:'Hola, encantado de conocerte'
+    }
+  ],
+  name:'avoid',
+  translate:'evitar',
+  wordType:'noun',
+  moreInfo:'Es un saludo que normalmente se usa',
 }
 
 export interface WordState{
@@ -12,7 +34,8 @@ export interface WordState{
     modalWord:ModalState,
     showAddButton:boolean,
     showEditButtons:boolean,
-    typeWordSearch:number
+    typeWordSearch:number,
+    wordDetail?:Word
 }
 
 export const PREDIFINED_WORD_STATE:WordState = {
@@ -20,9 +43,13 @@ export const PREDIFINED_WORD_STATE:WordState = {
     words:[],
     modalWord:{
         show:false,
-        type: 'new'
+        type: 'new',
+        indexExample:0
     },
     showAddButton:true,
     showEditButtons:false,
-    typeWordSearch: 0
+    typeWordSearch: 0,
+    wordDetail:mockWord
 }
+
+

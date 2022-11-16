@@ -33,6 +33,15 @@ import { SpinnerComponent } from './core/components/spinner/spinner.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { DeleteWordComponent } from './shared/components/modal/templates/delete-word/delete-word.component';
 import { NewWordComponent } from './shared/components/modal/templates/new-word/new-word.component';
+import { WordDetailComponent } from './shared/components/word-detail/word-detail.component';
+import { DetailWordPageComponent } from './page/detail-word-page/detail-word-page.component';
+import { NewExampleComponent } from './shared/components/modal/templates/new-example/new-example.component';
+import { ButtonComponent } from './shared/components/button/button.component';
+import { ModifyButtonComponent } from './shared/components/button/template/modify-button/modify-button.component';
+import { DeleteButtonComponent } from './shared/components/button/template/delete-button/delete-button.component';
+import { CloseButtonComponent } from './shared/components/button/template/close-button/close-button.component';
+import { AddCrossButtonComponent } from './shared/components/button/template/add-button/add-button.component';
+import { DeleteExampleComponent } from './shared/components/modal/templates/delete-example/delete-example.component';
 
 
 @NgModule({
@@ -49,7 +58,16 @@ import { NewWordComponent } from './shared/components/modal/templates/new-word/n
     SpinnerComponent,
     ModalComponent,
     DeleteWordComponent,
-    NewWordComponent
+    NewWordComponent,
+    WordDetailComponent,
+    DetailWordPageComponent,
+    NewExampleComponent,
+    ButtonComponent,
+    ModifyButtonComponent,
+    DeleteButtonComponent,
+    CloseButtonComponent,
+    AddCrossButtonComponent,
+    DeleteExampleComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Word, WordType, WORD_TYPE, WORD_TYPE_SEARCH } from 'src/app/shared/models/word.interface';
+import { ExamplePhrases, Word, WordType, WORD_TYPE, WORD_TYPE_SEARCH } from 'src/app/shared/models/word.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectModalWord, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
+import { selectModalType, selectModalWord, selectWordModalWord, selectWordTypeSearch } from 'src/app/state/selectors/words.selectors';
 import { addWord,  modifyWord } from 'src/app/state/actions/words.actions';
+import { ModalType } from 'src/app/shared/models/word.state';
 
-const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa&text=';
+const REVERSO_URL_ENG = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa&text=';
+const REVERSO_URL_SPA = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=spa&tl=eng&text=';
 
 @Component({
   selector: 'app-new-word',
@@ -16,15 +18,20 @@ const REVERSO_URL = 'https://www.reverso.net/traducci%C3%B3n-texto#sl=eng&tl=spa
 export class NewWordComponent implements OnInit {
 
   form!:FormGroup;
-  searchText:string = REVERSO_URL;
+  searchTextEng:string = REVERSO_URL_ENG;
+  searchTextSpa:string = REVERSO_URL_SPA;
   sendButton:boolean = true;
   translateButton:boolean = true;
   wordPreloaded:Observable<Word> = new Observable<Word>();
+
   wordType$:BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  wordPreLoaded$:BehaviorSubject<Word> = new BehaviorSubject<Word>({createdAt:'',name:'',translate:'',wordType:'noun',examples:[]});
+  modalType$:BehaviorSubject<ModalType> = new BehaviorSubject<ModalType>('new');
 
   isMod:boolean = false;
   idPrecharge?:string = "";
   modalTitle:string = '';
+  examples:ExamplePhrases[]= []
 
   optionSelect: {label:string; value:WordType}[] = WORD_TYPE;
 
@@ -32,6 +39,7 @@ export class NewWordComponent implements OnInit {
     private readonly store:Store
   ) {
     this.store.select(selectWordTypeSearch).subscribe(type => this.wordType$.next(type));
+    this.store.select(selectModalType).subscribe(type => this.modalType$.next(type));
    }
 
   ngOnInit(): void {
@@ -39,29 +47,32 @@ export class NewWordComponent implements OnInit {
       inputWord: new FormControl('', Validators.required),
       translateWord: new FormControl('', Validators.required),
       typeWord: new FormControl(this.getWordTypeDefault, Validators.required),
+      moreInfo: new FormControl(''),
     });
 
     this.form.valueChanges.subscribe(_=>{
       this.sendButton = !this.form.valid;
       this.translateButton = !this.form.value.inputWord ==! '';
-      this.searchText = REVERSO_URL + this.form.value.inputWord
+      this.searchTextEng = REVERSO_URL_ENG + this.form.value.inputWord;
+      this.searchTextSpa = REVERSO_URL_SPA + this.form.value.translateWord;
     });
 
-    this.store.select(selectModalWord).subscribe( modalStatus => {
+    this.modalTitle = this.modalType$.getValue() === 'new'? "Add new word" : "Modify word";
+    this.isMod = this.modalType$.getValue() === 'modify';
+    this.isMod && this.preloadWordToModify()
+  }
 
-      this.modalTitle = modalStatus.type === 'new'? "Add new word" : "Modify word";
-      this.isMod = modalStatus.type === 'new'? false:true;
-
-      if(modalStatus.wordPrecharged){
-        this.form.patchValue({
-          inputWord: modalStatus.wordPrecharged!.name,
-          translateWord: modalStatus.wordPrecharged!.translate,
-          typeWord: modalStatus.wordPrecharged!.wordType
-        })
-
-        this.idPrecharge = modalStatus.wordPrecharged!.id!
-      }
+  preloadWordToModify(){
+    this.store.select(selectWordModalWord).subscribe( word => this.wordPreLoaded$.next(word));
+    const word = this.wordPreLoaded$.getValue();
+    this.form.patchValue({
+      inputWord: word.name,
+      translateWord: word.translate,
+      typeWord: word.wordType,
+      moreInfo: word.moreInfo ?? ''
     })
+    this.examples = word.examples;
+    this.idPrecharge = word.id!;
   }
 
   saveWord(){
@@ -71,7 +82,9 @@ export class NewWordComponent implements OnInit {
       translate: this.form.value.translateWord.toLowerCase(),
       createdAt: dateToday.toDateString(),
       name:this.form.value.inputWord.toLowerCase(),
-      wordType:this.form.value.typeWord
+      wordType:this.form.value.typeWord,
+      moreInfo:this.form.value.moreInfo,
+      examples: this.examples
     };
 
     this.isMod ?

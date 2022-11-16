@@ -1,8 +1,7 @@
 .container{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin: 1rem auto;
-    width: 80%;
 }
 
 .text{
@@ -15,12 +14,12 @@ h3{
     display: inline-block;
     width: fit-content;
     margin: auto;
-    color:var(--secondary-color);
+    color:var(--main-color);
 }
 
 .arrow_button{
     cursor: pointer;
-    fill:var(--secondary-color);
+    fill:var(--main-color);
 }
 
 .arrow_button:hover{

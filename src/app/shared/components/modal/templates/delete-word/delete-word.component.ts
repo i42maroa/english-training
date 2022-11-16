@@ -13,7 +13,7 @@ import { closeModal, deleteWord } from 'src/app/state/actions/words.actions';
 export class DeleteWordComponent implements OnInit {
 
   word$:Observable<Word> = new Observable<Word>();
-  wordToDelete$:BehaviorSubject<Word> = new BehaviorSubject<Word>({createdAt:'',name:'',translate:'',wordType:'noun'});;
+  wordToDelete$:BehaviorSubject<Word> = new BehaviorSubject<Word>({createdAt:'',name:'',translate:'',wordType:'noun',examples:[]});
 
   constructor(
     private readonly store: Store
@@ -27,9 +27,4 @@ export class DeleteWordComponent implements OnInit {
   deleteWord(){
     this.store.dispatch(deleteWord({word: this.wordToDelete$.getValue()}));
   }
-
-  closeModal(){
-    this.store.dispatch(closeModal());
-  }
-
 }

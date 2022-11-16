@@ -2,10 +2,13 @@
   <div class="blur"></div>
  <div class="modal_container">
       <div class="modal_close">
-          <div class="close_item" (click)="closeModal()">X</div>
+          <app-button [type]="'close'" (click)="closeModal()"></app-button>
       </div>
       <app-new-word *ngIf="(modalType$ | async).type === 'new'"></app-new-word>
       <app-new-word *ngIf="(modalType$ | async).type === 'modify'"></app-new-word>
       <app-delete-word *ngIf="(modalType$ | async).type === 'delete'"></app-delete-word>
+      <app-new-example *ngIf="(modalType$ | async).type === 'new-example'"></app-new-example>
+      <app-new-example *ngIf="(modalType$ | async).type === 'modify-example'"></app-new-example>
+      <app-delete-example *ngIf="(modalType$ | async).type === 'delete-example'"></app-delete-example>
   </div>
 </div>

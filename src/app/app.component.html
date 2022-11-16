@@ -2,6 +2,7 @@
     <div class="main_container">
         <app-header></app-header>
         <router-outlet></router-outlet>
+        <app-modal *ngIf="showModal$ | async" class="add_modal"></app-modal>
         <app-spinner></app-spinner>
     </div>
 </div>

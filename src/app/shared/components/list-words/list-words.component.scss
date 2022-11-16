@@ -8,27 +8,19 @@
     box-shadow: var(--box-shadow);
 }
 
-.header_container h2{
-    text-align: left;
-}
-
 .header_container{
     display: flex;
-    justify-content: space-between;
+    margin: auto;
+    width: 100%;
 }
 
-.header_container .icon{
-    margin: auto 0;
+.word_selector{
+  margin: auto;
+  width: 70%;
 }
 
 
-hr{
-    height:0;
-    border: 2px solid var(--secondary-color);
-    border-radius: 10px;
-    background-color: var(--secondary-color);
-    margin-bottom: 1rem;
-}
+
 
 .not_values{
     text-align: center;
@@ -39,16 +31,15 @@ hr{
 .line{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)), 1fr;
     justify-items: center;
     // flex-direction: row;
-     margin: 0.5rem 0;
+    margin: 0.5rem ;
 
 }
 
 .line p{
-    margin: 0.3rem auto;
-    text-align: left;
+    text-align: center;
+    cursor: pointer;
 }
 
 .strong_word{
@@ -56,17 +47,7 @@ hr{
     color: var(--secondary-color);
 }
 
-.icon{
-    width: 1.5rem;
-    height: 1.5rem;
-    cursor: pointer;
-    fill: var(--secondary-color);
-}
 
-.icon:hover{
-  transform:scale(1.1);
-  transition: 0.2s;
-}
 
 .edit_container{
     // width: 5rem;
@@ -74,6 +55,4 @@ hr{
     justify-content: space-evenly;
 }
 
-.edition_icon{
-    margin:  0.3rem;
-}
+
