@@ -42,6 +42,7 @@ import { DeleteButtonComponent } from './shared/components/button/template/delet
 import { CloseButtonComponent } from './shared/components/button/template/close-button/close-button.component';
 import { AddCrossButtonComponent } from './shared/components/button/template/add-button/add-button.component';
 import { DeleteExampleComponent } from './shared/components/modal/templates/delete-example/delete-example.component';
+import { SearcherComponent } from './shared/components/searcher/searcher.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { DeleteExampleComponent } from './shared/components/modal/templates/dele
     DeleteButtonComponent,
     CloseButtonComponent,
     AddCrossButtonComponent,
-    DeleteExampleComponent
+    DeleteExampleComponent,
+    SearcherComponent
   ],
   imports: [
     BrowserAnimationsModule,
