@@ -13,14 +13,14 @@ export class SearcherComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
     this.form = new FormGroup({
       searcher: new FormControl('')
     });
   }
 
   search(){
-    console.log(this.form.value.searcher)
+    const search = this.form.value.searcher
+    
   }
 
 }

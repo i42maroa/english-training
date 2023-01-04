@@ -43,6 +43,7 @@ import { CloseButtonComponent } from './shared/components/button/template/close-
 import { AddCrossButtonComponent } from './shared/components/button/template/add-button/add-button.component';
 import { DeleteExampleComponent } from './shared/components/modal/templates/delete-example/delete-example.component';
 import { SearcherComponent } from './shared/components/searcher/searcher.component';
+import { NgAisModule } from 'angular-instantsearch';
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import { SearcherComponent } from './shared/components/searcher/searcher.compone
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
+    NgAisModule.forRoot(),
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({
       maxAge:25,
