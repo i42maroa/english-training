@@ -84,7 +84,7 @@ import { NgAisModule } from 'angular-instantsearch';
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    NgAisModule.forRoot(),
+    // NgAisModule.forRoot(),
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({
       maxAge:25,
