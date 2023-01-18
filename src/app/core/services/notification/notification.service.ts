@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from "@angular/core";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatLegacySnackBar as MatSnackBar } from "@angular/material/legacy-snack-bar";
 import { SnackbarErrorComponent } from "../../components/snackbar/snackbar-error/snackbar-error.component";
 import { SnackbarOkComponent } from "../../components/snackbar/snackbar-ok/snackbar-ok.component";
 

@@ -2,7 +2,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar'
 import { MatIconModule } from '@angular/material/icon'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
