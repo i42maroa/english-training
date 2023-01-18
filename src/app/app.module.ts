@@ -2,7 +2,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar'
 import { MatIconModule } from '@angular/material/icon'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -29,6 +28,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestore, AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { SnackbarErrorComponent } from './core/components/snackbar/snackbar-error/snackbar-error.component';
 import { SnackbarOkComponent } from './core/components/snackbar/snackbar-ok/snackbar-ok.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SpinnerComponent } from './core/components/spinner/spinner.component';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { DeleteWordComponent } from './shared/components/modal/templates/delete-word/delete-word.component';
@@ -43,7 +43,8 @@ import { CloseButtonComponent } from './shared/components/button/template/close-
 import { AddCrossButtonComponent } from './shared/components/button/template/add-button/add-button.component';
 import { DeleteExampleComponent } from './shared/components/modal/templates/delete-example/delete-example.component';
 import { SearcherComponent } from './shared/components/searcher/searcher.component';
-import { NgAisModule } from 'angular-instantsearch';
+// import { NgAisModule } from 'angular-instantsearch';
+import { MatLegacySnackBarModule } from '@angular/material/legacy-snack-bar';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { NgAisModule } from 'angular-instantsearch';
   imports: [
     BrowserAnimationsModule,
     MatSnackBarModule,
+    MatLegacySnackBarModule,
     MatIconModule,
     BrowserModule,
     AppRoutingModule,
